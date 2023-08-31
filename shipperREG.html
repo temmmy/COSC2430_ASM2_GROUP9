@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>Vendor Registration</title>
+</head>
+
+<body>
+    <div class="card col-md-4 mt-5 mx-auto">
+        <div class="card-body">
+            <form class="mx-auto">
+                <div class="card-header text-center mb-4">
+                    <h3>Shipper Registration</h3>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="username">Username</label>
+                    <input type="email" class="form-control" id="username" placeholder="Enter here">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter here">
+                </div>
+                <div class="mb-3">
+                    <label for="profilePicture" class="form-label">Profile Picture</label>
+                    <input class="form-control" type="file" id="profilePicture">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="shipperName">Shipper's Name</label>
+                    <input type="email" class="form-control" id="shipperName" placeholder="Enter here">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="assignedHub">Assigned Distribution Hub</label>
+                    <select class="form-select" aria-label="Assigned Distribution Hub">
+                        <option selected></option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-dark">Register</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
