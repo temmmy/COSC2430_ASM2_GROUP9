@@ -18,12 +18,15 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="username">Username</label>
-                    <input type="email" class="form-control" id="username" placeholder="Enter here">
+                    <input type="text" class="form-control" id="username" placeholder="Enter here">
+                    <div class="username_error text-danger"></div>
                 </div>
                 <div class="form-group mb-3">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter here">
+                    <div class="password_error text-danger"></div>
                 </div>
+                <button type="submit" class="btn btn-dark">Log In</button>
             </form>
         </div>
     </div>
@@ -36,11 +39,37 @@
     <!-- Custom JS -->
     <script>
         const form = document.querySelector('form');
-        form.addEventListener('submit', (event) => {
+        const usernameError = document.querySelector('.username_error')
+        const passwordError = document.querySelector('.password_error')
+        form.addEventListener('submit', async (event) => {
             event.preventDefault();
+
+            usernameError.textContent = ' '
+            passwordError.textContent = ' '
+
             // getting values from the form
             const username = form.username.value
             const password = form.password.value
+
+            try {
+                const res = await fetch('/customerLOG', {
+                    method: 'POST',
+                    body: JSON.stringify({ username, password }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                const data = await res.json()
+                console.log(data)
+                if (data.errors) {
+                    usernameError.textContent = data.errors.username
+                    passwordError.textContent = data.errors.password
+                }
+                if (data.customer) {
+                    location.assign('/')
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
         })
     </script>
 </body>

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="card col-md-4 mt-5 mx-auto">
+    <div class="card col-md-6 mt-5 mx-auto">
         <div class="card-body">
             <form class="mx-auto">
                 <div class="card-header text-center mb-4">
@@ -19,12 +19,12 @@
                 <div class="form-group mb-3">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" placeholder="Enter here" required>
-                    <div class="username_error"></div>
+                    <div class="username_error text-danger"></div>
                 </div>
                 <div class="form-group mb-3">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter here" required>
-                    <div class="password_error"></div>
+                    <div class="password_error text-danger"></div>
                 </div>
                 <div class="mb-3">
                     <label for="profilePicture" class="form-label">Profile Picture</label>
@@ -33,12 +33,12 @@
                 <div class="form-group mb-3">
                     <label for="name">Customer's Name</label>
                     <input type="text" class="form-control" id="name" placeholder="Enter here" required>
-                    <div class="name_error"></div>
+                    <div class="name_error text-danger"></div>
                 </div>
                 <div class="form-group mb-3">
                     <label for="address">Customer's Address</label>
                     <input type="text" class="form-control" id="address" placeholder="Enter here" required>
-                    <div class="address_error"></div>
+                    <div class="address_error text-danger"></div>
                 </div>
                 <button type="submit" class="btn btn-dark">Sign Up</button>
             </form>
@@ -53,14 +53,48 @@
 
     <!-- Custom JS -->
     <script>
-        const form = document.querySelector('form');
-        form.addEventListener('submit', (event) => {
+        const form = document.querySelector('form')
+        const usernameError = document.querySelector('.username_error')
+        const passwordError = document.querySelector('.password_error')
+        const nameError = document.querySelector('.name_error')
+        const addressError = document.querySelector('.address_error')
+
+        form.addEventListener('submit', async (event) => {
             event.preventDefault();
+
+            usernameError.textContent = ' '
+            passwordError.textContent = ' '
+            nameError.textContent = ' '
+            addressError.textContent = ' '
+
             // getting values from the form
             const username = form.username.value
             const password = form.password.value
             const name = form.name.value
             const address = form.address.value
+
+            try {
+                const res = await fetch('/customerREG', {
+                    method: 'POST',
+                    body: JSON.stringify({ username, password, name, address }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                const data = await res.json()
+                console.log(data)
+                if (data.errors) {
+                    usernameError.textContent = data.errors.username
+                    passwordError.textContent = data.errors.password
+                    nameError.textContent = data.errors.name
+                    address.textContent = data.errors.address
+                }
+                if (data.customer) {
+                    location.assign('/customerLOG')
+                }
+
+            }
+            catch (err) {
+                console.log(err);
+            }
         })
     </script>
 </body>
