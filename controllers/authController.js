@@ -8,10 +8,10 @@ const handleErrors = (err) => {
 
 
     if (err.message === 'incorrect username') {
-        errors.username = 'that username is not registered'
+        errors.username = 'The username is not registered'
     }
     if (err.message === 'incorrect password') {
-        errors.password = 'that password is incorrect'
+        errors.password = 'The password is incorrect'
     }
     // validation error
     if (err.message.includes('customer validation failed')) {

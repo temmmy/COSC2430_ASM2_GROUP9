@@ -22,6 +22,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 app.listen(4000)
 
 // routes
-app.get('/', (req, res) => res.render('homepage'))
+app.get('/', (req, res) => res.render('customerLOG'))
+app.get('/homepage', requireAuth, (req, res) => res.render('homepage'))
 app.get('/shipper', (req, res) => res.redner('shipperREG'))
 app.use(authRoutes)
