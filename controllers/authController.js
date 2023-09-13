@@ -48,8 +48,10 @@ const createToken = (id) => {
 
 module.exports.signup_post = async (req, res) => {
     const { username, password, name, address } = req.body;
+    console.log(req.body);
+    const profilePicture = req.file.path;
     try {
-        const customer = await Customer.create({ username, password, name, address })
+        const customer = await Customer.create({ username, password, profilePicture, name, address })
         const token = createToken(customer._id)
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
         res.status(201).json({ customer: customer._id })
@@ -75,3 +77,7 @@ module.exports.login_post = async (req, res) => {
     }
 }
 
+module.exports.logout_get = (req, res) => {
+    res.cookie('jwt', '', { maxAge: 1 })
+    res.redirect('/');
+}

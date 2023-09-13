@@ -16,6 +16,9 @@ const customerSchema = new mongoose.Schema({
         minLength: [8, 'Minimum password length is 8 characters'],
         maxLength: [20, 'Maximum password length is 20 characters']
     },
+    profilePicture: {
+        type: String
+    },
     name: {
         type: String,
         required: [true, "Please, enter a name"],
