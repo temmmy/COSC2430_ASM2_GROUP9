@@ -5,16 +5,22 @@ const customerSchema = new mongoose.Schema({
     username: {
         type: String,
         required: [true, 'Please enter an username'],
-        unique: true,
+        unique: [true, 'This username already exists'],
         minLength: [8, 'Minimum username length is 8 characters'],
         maxLength: [15, 'Maximum username length is 15 characters'],
     },
     password: {
         type: String,
         required: [true, 'Please, enter a password'],
-        specialChar: true,
-        minLength: [8, 'Minimum password length is 8 characters'],
-        maxLength: [20, 'Maximum password length is 20 characters']
+        validate: {
+            validator: function (value) {
+                // Regular expression to match at least one special character
+                return /[!@#$%^&*(),.?":{}|<>]/.test(value);
+            },
+            message: 'Password must contain at least one special character',
+            minLength: [8, 'Minimum password length is 8 characters'],
+            maxLength: [20, 'Maximum password length is 20 characters']
+        }
     },
     profilePicture: {
         type: String

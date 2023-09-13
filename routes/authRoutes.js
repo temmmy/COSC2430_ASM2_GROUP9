@@ -5,10 +5,15 @@ const upload = require('../middleware/uploadMIddleware')
 
 const router = Router()
 
-router.get('/customerREG', authController.signup_get)
-router.post('/customerREG', upload.single('profilePicture'), authController.signup_post)
-router.get('/customerLOG', authController.login_get)
-router.post('/customerLOG', authController.login_post)
+// Routers for customer user
+router.get('/customerREG', authController.customer_signup_get)
+router.post('/customerREG', upload.single('profilePicture'), authController.customer_signup_post)
+router.get('/customerLOG', authController.customer_login_get)
+router.post('/customerLOG', authController.customer_login_post)
 router.get('/logout', authController.logout_get)
 
+// Routes for vendor user
+
+
+// Routes for shipper user
 module.exports = router

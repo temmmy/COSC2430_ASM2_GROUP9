@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 // handling errors
 const handleErrors = (err) => {
     console.log(err.message, err.code)
-    let errors = { username: ' ', password: ' ', name: ' ', address: ' ' };
+    let errors = { username: ' ', password: ' ', name: ' ', address: ' ', businessName: ' ', businessAddress: ' ' };
 
 
     if (err.message === 'incorrect username') {
@@ -27,11 +27,11 @@ const handleErrors = (err) => {
 
     return errors;
 }
-module.exports.signup_get = (req, res) => {
+module.exports.customer_signup_get = (req, res) => {
     res.render('customerREG');
 }
 
-module.exports.login_get = (req, res) => {
+module.exports.customer_login_get = (req, res) => {
     res.render('customerLOG')
 }
 
@@ -46,7 +46,7 @@ const createToken = (id) => {
     })
 }
 
-module.exports.signup_post = async (req, res) => {
+module.exports.customer_signup_post = async (req, res) => {
     const { username, password, name, address } = req.body;
     console.log(req.body);
     const profilePicture = req.file.path;
@@ -62,7 +62,7 @@ module.exports.signup_post = async (req, res) => {
     }
 }
 
-module.exports.login_post = async (req, res) => {
+module.exports.customer_login_post = async (req, res) => {
     const { username, password } = req.body;
 
     try {
