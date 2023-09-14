@@ -25,6 +25,11 @@ const shipperSchema = new mongoose.Schema({
     profilePicture: {
         type: String
     },
+    shipperName: {
+        type: String,
+        required: [true, 'Please, enter a name'],
+        minLength: [5, 'Minimum name length is 5 characters']
+    },
     distributionHub: {
         type: String,
         required: [true, 'Please, select a distribution hub']

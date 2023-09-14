@@ -28,7 +28,7 @@ const customerSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Please, enter a name"],
-        minLength: [5, 'Minimum address length is 5 characters']
+        minLength: [5, 'Minimum name length is 5 characters']
     },
     address: {
         type: String,

@@ -1,10 +1,12 @@
 const Customer = require('../models/Customer')
+const Shipper = require('../models/Shipper')
+const Vendor = require('../models/Vendor')
 const jwt = require('jsonwebtoken')
 
-// handling errors
+// handling general errors
 const handleErrors = (err) => {
     console.log(err.message, err.code)
-    let errors = { username: ' ', password: ' ', name: ' ', address: ' ', businessName: ' ', businessAddress: ' ' };
+    let errors = { username: ' ', password: ' ', name: ' ', address: ' ', businessName: ' ', businessAddress: ' ', shipperName: ' ', distributionHub: ' ' };
 
 
     if (err.message === 'incorrect username') {
@@ -14,7 +16,7 @@ const handleErrors = (err) => {
         errors.password = 'The password is incorrect'
     }
     // validation error
-    if (err.message.includes('customer validation failed')) {
+    if (err.message.includes('validation failed')) {
         Object.values(err.errors).forEach(({ properties }) => {
             errors[properties.path] = properties.message
         })
@@ -27,12 +29,22 @@ const handleErrors = (err) => {
 
     return errors;
 }
+
+
 module.exports.customer_signup_get = (req, res) => {
     res.render('customerREG');
 }
 
 module.exports.customer_login_get = (req, res) => {
-    res.render('customerLOG')
+    res.render('LOG')
+}
+
+module.exports.shipper_signup_get = (req, res) => {
+    res.render('shipperREG')
+}
+
+module.exports.shipper_login_get = (req, res) => {
+    res.render('LOG')
 }
 
 module.exports.homepage_get = (req, res) => {
@@ -46,6 +58,7 @@ const createToken = (id) => {
     })
 }
 
+// POST requests for customer
 module.exports.customer_signup_post = async (req, res) => {
     const { username, password, name, address } = req.body;
     console.log(req.body);
@@ -77,6 +90,37 @@ module.exports.customer_login_post = async (req, res) => {
     }
 }
 
+//POST request for Shipper
+module.exports.shipper_signup_post = async (req, res) => {
+    const { username, password, shipperName, distributionHub } = req.body;
+    console.log(req.body);
+    const profilePicture = req.file.path;
+    try {
+        const shipper = await Shipper.create({ username, password, profilePicture, shipperName, distributionHub })
+        const token = createToken(shipper._id)
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+        res.status(201).json({ shipper: shipper._id })
+    }
+    catch (err) {
+        const errors = handleErrors(err)
+        res.status(400).json({ errors })
+    }
+}
+
+module.exports.shipper_login_post = async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        const shipper = await shipper.login(username, password)
+        const token = createToken(shipper._id)
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+        res.status(200).json({ shipper: shipper._id })
+    }
+    catch (err) {
+        const errors = handleErrors(err)
+        res.status(400).json({ errors })
+    }
+}
 module.exports.logout_get = (req, res) => {
     res.cookie('jwt', '', { maxAge: 1 })
     res.redirect('/');
