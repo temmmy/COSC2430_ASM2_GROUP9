@@ -8,7 +8,7 @@ const requireAuth = (req, res, next) => {
         jwt.verify(token, 'customer secret', (err, decodedToken) => {
             if (err) {
                 console.log(err.message)
-                res.redirect('customerLOG')
+                res.redirect('login')
 
             }
             else {
@@ -18,7 +18,7 @@ const requireAuth = (req, res, next) => {
         })
     }
     else {
-        res.redirect('/customerLOG')
+        res.redirect('/login')
     }
 }
 

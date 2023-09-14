@@ -2,7 +2,6 @@ const express = require('express')
 const mongoose = require('mongoose')
 const authRoutes = require('./routes/authRoutes')
 const cookieParser = require('cookie-parser')
-const multer = require('multer')
 const { requireAuth } = require('./middleware/authMiddleware')
 
 const app = express()
@@ -21,23 +20,11 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
 
-// Creating Storage for saving Images
-
-const Storage = multer.diskStorage({
-    destination: 'public/images/profilePicture',
-    filename: (req, file, cb) => {
-        cb(null, file.originalname)
-    }
-})
-
-const Upload = multer({
-    storage: Storage
-}).single('file')
-
-app.listen(4000)
-
 // routes
 app.get('/', (req, res) => res.render('homepage'))
-app.get('/homepage', requireAuth, (req, res) => res.render('customerProducts'))
-app.get('/shipper', (req, res) => res.render('shipperREG'))
+app.get('/productsPage', requireAuth, (req, res) => res.render('customerProducts'))
+app.get('/shipperREG', (req, res) => res.render('shipperREG'))
+app.get('/customerREG', (req, res) => res.render('customerREG'))
+app.get('/vendorREG', (req, res) => res.render('vendorREG'))
+app.get('/login', (req, res) => res.render('LOG.ejs'))
 app.use(authRoutes)
