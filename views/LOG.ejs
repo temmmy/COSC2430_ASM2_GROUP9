@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <title>Login </title>
+    <title>Login</title>
 </head>
 
 <body>
@@ -16,8 +16,8 @@
                 <div class="card-header text-center mb-4">
                     <h3>Login</h3>
                 </div>
-                <select class="form-select mb-3" name="role" id="role">
-                    <option selected>User Type</option>
+                <select class="form-select mb-3" name="role" id="role" required>
+                    <option selected>Select</option>
                     <option value="customer">Customer</option>
                     <option value="vendor">Vendor</option>
                     <option value="shipper">Shipper</option>
@@ -57,20 +57,18 @@
             const username = form.username.value
             const password = form.password.value
             const role = form.role.value;
-
             try {
-                const res = await fetch('/${role}LOG', {
+                const res = await fetch(`/${role}LOG`, {
                     method: 'POST',
                     body: JSON.stringify({ username, password }),
                     headers: { 'Content-Type': 'application/json' }
                 })
                 const data = await res.json()
-                console.log(data)
                 if (data.errors) {
                     usernameError.textContent = data.errors.username
                     passwordError.textContent = data.errors.password
                 }
-                if (data.customer) {
+                if (data.customer || data.shipper) {
                     location.assign('/')
                 }
             }

@@ -27,13 +27,13 @@ const vendorSchema = new mongoose.Schema({
     },
     businessName: {
         type: String,
-        unique: [true, "Vendor with such business name already exists"],
+        unique: [true, "Vendor with such name already exists"],
         required: [true, "Please, enter a name"],
         minLength: [5, 'Minimum address length is 5 characters']
     },
     businessAddress: {
         type: String,
-        unique: [true, "Vendor with such business address alredy exists"],
+        unique: [true, "Vendor with such address alredy exists"],
         required: [true, "Please, enter an address"],
         minLength: [5, 'Minimum address length is 5 characters']
     }

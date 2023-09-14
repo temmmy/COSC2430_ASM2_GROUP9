@@ -23,10 +23,14 @@ const handleErrors = (err) => {
     }
     // duplication error
     if (err.code === 11000) {
-        errors.username = "The username is taken"
+        if ((Object.keys(err.keyPattern)[0]) == 'username') {
+            errors[Object.keys(err.keyPattern)[0]] = "The username is already registered"
+        }
+        else {
+            errors[Object.keys(err.keyPattern)[0]] = "It is already taken"
+        }
         return errors;
     }
-
     return errors;
 }
 
@@ -47,6 +51,14 @@ module.exports.shipper_login_get = (req, res) => {
     res.render('LOG')
 }
 
+module.exports.vendor_signup_get = (req, res) => {
+    res.render('vendorREG')
+}
+
+module.exports.vendor_login_get = (req, res) => {
+    res.render('LOG')
+}
+
 module.exports.homepage_get = (req, res) => {
     res.render('homepage')
 }
@@ -58,7 +70,7 @@ const createToken = (id) => {
     })
 }
 
-// POST requests for customer
+// POST requests for Customer
 module.exports.customer_signup_post = async (req, res) => {
     const { username, password, name, address } = req.body;
     console.log(req.body);
@@ -90,7 +102,7 @@ module.exports.customer_login_post = async (req, res) => {
     }
 }
 
-//POST request for Shipper
+//POST requests for Shipper
 module.exports.shipper_signup_post = async (req, res) => {
     const { username, password, shipperName, distributionHub } = req.body;
     console.log(req.body);
@@ -111,7 +123,7 @@ module.exports.shipper_login_post = async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        const shipper = await shipper.login(username, password)
+        const shipper = await Shipper.login(username, password)
         const token = createToken(shipper._id)
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
         res.status(200).json({ shipper: shipper._id })
@@ -121,6 +133,39 @@ module.exports.shipper_login_post = async (req, res) => {
         res.status(400).json({ errors })
     }
 }
+
+//POST requests for Vendor
+module.exports.vendor_signup_post = async (req, res) => {
+    const { username, password, businessName, businessAddress } = req.body;
+    console.log(req.body);
+    const profilePicture = req.file.path;
+    try {
+        const vendor = await Vendor.create({ username, password, profilePicture, businessName, businessAddress })
+        const token = createToken(vendor._id)
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+        res.status(201).json({ vendor: vendor._id })
+    }
+    catch (err) {
+        const errors = handleErrors(err)
+        res.status(400).json({ errors })
+    }
+}
+
+module.exports.vendor_login_post = async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        const vendor = await Vendor.login(username, password)
+        const token = createToken(vendor._id)
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+        res.status(200).json({ customer: vendor._id })
+    }
+    catch (err) {
+        const errors = handleErrors(err)
+        res.status(400).json({ errors })
+    }
+}
+
 module.exports.logout_get = (req, res) => {
     res.cookie('jwt', '', { maxAge: 1 })
     res.redirect('/');
