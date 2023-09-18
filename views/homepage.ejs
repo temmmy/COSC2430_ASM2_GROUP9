@@ -10,250 +10,203 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+    <link rel="icon" type="image/png" href="/images/LOGOBLACk.png">
     <title>Homepage</title>
 </head>
 
 <body>
     <!-- navbar -->
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <div class="container-xxl">
-                <a href="#intro" class="navbar-brand ms-1">
-                    <img src="/images/LOGOWHITE.png" alt="Minima Records logo" height="50px" />
-                </a>
+    <%- include('partials/header_home') %>
+        <main>
+            <section id="intro">
+                <div class="container my-5 px-5">
+                    <div class="row justify-content-center align-items-center">
+                        <!-- hero region -->
+                        <div class="col-md-6 text-center text-md-start">
+                            <h2 class="display-3">All of Your Favourite Vinyls, All At One Place</h2>
+                            <p class="lead text-secondary">The best music quality ever recorded.</p>
+                            <button class="btn btn-dark btn-lg">Shop Now</button>
+                        </div>
+                        <!-- main image -->
+                        <img src="./images/vulfpeck.webp"
+                            alt="the band Vulfpeck's Vinyl print of their album 'The Beautiful Game' with Jack Stratton as a soccer player."
+                            class="col-md-6 d-none d-md-block" />
+                    </div>
+                </div>
+            </section>
 
-                <!-- mobile toggler -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
-                    aria-controls="main-nav" aria-expanded="false" aria-label="Toggle Navigation" style="border: none">
-                    <span class="navbar-toggler-icon navbar-dark"></span>
-                </button>
-
-                <!-- navigation links -->
-                <div class="collapse navbar-collapse justify-content-end align-center me-2" id="main-nav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link active" aria-current="page">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="login" class="nav-link">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <button class="btn nav-link dropdown-toggle" type="button" id="dropdownMenuButton"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Register
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="customerREG">Customer</a>
-                                    <a class="dropdown-item" href="vendorREG">Vendor</a>
-                                    <a class="dropdown-item" href="shipperREG">Shipper</a>
+            <section id="bestsellers" class="bg-dark mt-5 p-5">
+                <div class="container-lg">
+                    <!-- heading -->
+                    <div class="text-center">
+                        <h2 class="text-light">Bestsellers</h2>
+                        <p class="lead text-light">Take a look at some of the best in our store</p>
+                    </div>
+                    <!-- carousel -->
+                    <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <!-- item #1 -->
+                            <div class="carousel-item active">
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-9 col-lg-6 col-xl-4">
+                                        <div class="card border-0 px-3">
+                                            <img src="/images/vulfpeck.webp" alt="" />
+                                            <div class="card-body text-center">
+                                                <h4 class="card-title">The Beautiful Game</h4>
+                                                <p class="lead card-subtitle">Vulfpeck</p>
+                                                <p class="display-5 my-4 text-muted fw-bold">$249.99</p>
+                                                <p class="card-text text-secondary d-none d-lg-block">
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores,
+                                                    mollitia.
+                                                </p>
+                                                <a href="#" class="btn btn-outline-dark btn-lg my-2">Buy Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
 
-    <main>
-        <section id="intro">
-            <div class="container my-5 px-5">
-                <div class="row justify-content-center align-items-center">
-                    <!-- hero region -->
-                    <div class="col-md-6 text-center text-md-start">
-                        <h2 class="display-3">All of Your Favourite Vinyls, All At One Place</h2>
-                        <p class="lead text-secondary">The best music quality ever recorded.</p>
-                        <button class="btn btn-dark btn-lg">Shop Now</button>
-                    </div>
-                    <!-- main image -->
-                    <img src="./images/vulfpeck.webp"
-                        alt="the band Vulfpeck's Vinyl print of their album 'The Beautiful Game' with Jack Stratton as a soccer player."
-                        class="col-md-6 d-none d-md-block" />
-                </div>
-            </div>
-        </section>
+                            <!-- item #2 -->
+                            <div class="carousel-item">
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-9 col-lg-6 col-xl-4">
+                                        <div class="card border-0 px-3">
+                                            <img src="../images/vulfpeck.webp" alt="" />
+                                            <div class="card-body text-center">
+                                                <h4 class="card-title">The Beautiful Game</h4>
+                                                <p class="lead card-subtitle">Vulfpeck</p>
+                                                <p class="display-5 my-4 text-muted fw-bold">$249.99</p>
+                                                <p class="card-text text-secondary d-none d-lg-block">
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores,
+                                                    mollitia.
+                                                </p>
+                                                <a href="#" class="btn btn-outline-dark btn-lg my-2">Buy Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-        <section id="bestsellers" class="bg-dark mt-5 p-5">
-            <div class="container-lg">
-                <!-- heading -->
-                <div class="text-center">
-                    <h2 class="text-light">Bestsellers</h2>
-                    <p class="lead text-light">Take a look at some of the best in our store</p>
-                </div>
-                <!-- carousel -->
-                <div id="carousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <!-- item #1 -->
-                        <div class="carousel-item active">
-                            <div class="row align-items-center justify-content-center">
-                                <div class="col-9 col-lg-6 col-xl-4">
-                                    <div class="card border-0 px-3">
-                                        <img src="/images/vulfpeck.webp" alt="" />
-                                        <div class="card-body text-center">
-                                            <h4 class="card-title">The Beautiful Game</h4>
-                                            <p class="lead card-subtitle">Vulfpeck</p>
-                                            <p class="display-5 my-4 text-muted fw-bold">$249.99</p>
-                                            <p class="card-text text-secondary d-none d-lg-block">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores,
-                                                mollitia.
-                                            </p>
-                                            <a href="#" class="btn btn-outline-dark btn-lg my-2">Buy Now</a>
+                            <!-- item #3 -->
+                            <div class="carousel-item">
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-9 col-lg-6 col-xl-4">
+                                        <div class="card border-0 px-3">
+                                            <img src="./images/vulfpeck.webp" alt="" />
+                                            <div class="card-body text-center">
+                                                <h4 class="card-title">The Beautiful Game</h4>
+                                                <p class="lead card-subtitle">Vulfpeck</p>
+                                                <p class="display-5 my-4 text-muted fw-bold">$249.99</p>
+                                                <p class="card-text text-secondary d-none d-lg-block">
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores,
+                                                    mollitia.
+                                                </p>
+                                                <a href="#" class="btn btn-outline-dark btn-lg my-2">Buy Now</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- item #2 -->
-                        <div class="carousel-item">
-                            <div class="row align-items-center justify-content-center">
-                                <div class="col-9 col-lg-6 col-xl-4">
-                                    <div class="card border-0 px-3">
-                                        <img src="../images/vulfpeck.webp" alt="" />
-                                        <div class="card-body text-center">
-                                            <h4 class="card-title">The Beautiful Game</h4>
-                                            <p class="lead card-subtitle">Vulfpeck</p>
-                                            <p class="display-5 my-4 text-muted fw-bold">$249.99</p>
-                                            <p class="card-text text-secondary d-none d-lg-block">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores,
-                                                mollitia.
-                                            </p>
-                                            <a href="#" class="btn btn-outline-dark btn-lg my-2">Buy Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- prev and next buttons -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
 
-                        <!-- item #3 -->
-                        <div class="carousel-item">
-                            <div class="row align-items-center justify-content-center">
-                                <div class="col-9 col-lg-6 col-xl-4">
-                                    <div class="card border-0 px-3">
-                                        <img src="./images/vulfpeck.webp" alt="" />
-                                        <div class="card-body text-center">
-                                            <h4 class="card-title">The Beautiful Game</h4>
-                                            <p class="lead card-subtitle">Vulfpeck</p>
-                                            <p class="display-5 my-4 text-muted fw-bold">$249.99</p>
-                                            <p class="card-text text-secondary d-none d-lg-block">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores,
-                                                mollitia.
-                                            </p>
-                                            <a href="#" class="btn btn-outline-dark btn-lg my-2">Buy Now</a>
-                                        </div>
+            <section id="reviews">
+                <div class="container-lg my-5">
+                    <div class="text-center">
+                        <h2>Reviews</h2>
+                        <p class="lead">Hear what some of our customers has to say</p>
+                    </div>
+
+                    <!-- reviews -->
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="list-group">
+                                <div class="list-group-item py-3">
+                                    <div class="mb-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
                                     </div>
+                                    <h5 class="mb-1">A must for vinyl lovers!</h5>
+                                    <p class="mb-1">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odit sint
+                                        assumenda non possimus dignissimos tenetur, autem, temporibus adipisci enim hic
+                                        culpa, at nostrum minus? Illum deserunt earum nisi est fugiat qui voluptas
+                                        incidunt dicta quo.
+                                    </p>
+                                </div>
+                                <div class="list-group-item py-3">
+                                    <div class="mb-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                    </div>
+                                    <h5 class="mb-1">Great collection!</h5>
+                                    <p class="mb-1">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odit sint
+                                        assumenda non possimus dignissimos tenetur, autem, temporibus adipisci enim hic
+                                        culpa, at nostrum minus? Illum deserunt earum nisi est fugiat qui voluptas
+                                        incidunt dicta quo.
+                                    </p>
+                                </div>
+                                <div class="list-group-item py-3">
+                                    <div class="mb-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <h5 class="mb-1">Love the vibe of the shop!</h5>
+                                    <p class="mb-1">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odit sint
+                                        assumenda non possimus dignissimos tenetur, autem, temporibus adipisci enim hic
+                                        culpa, at nostrum minus? Illum deserunt earum nisi est fugiat qui voluptas
+                                        incidunt dicta quo.
+                                    </p>
+                                </div>
+                                <div class="list-group-item py-3">
+                                    <div class="mb-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star"></i>
+                                    </div>
+                                    <h5 class="mb-1">Great customer service!</h5>
+                                    <p class="mb-1">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odit sint
+                                        assumenda non possimus dignissimos tenetur, autem, temporibus adipisci enim hic
+                                        culpa, at nostrum minus? Illum deserunt earum nisi est fugiat qui voluptas
+                                        incidunt dicta quo.
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- prev and next buttons -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
-            </div>
-        </section>
-
-        <section id="reviews">
-            <div class="container-lg my-5">
-                <div class="text-center">
-                    <h2>Reviews</h2>
-                    <p class="lead">Hear what some of our customers has to say</p>
-                </div>
-
-                <!-- reviews -->
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="list-group">
-                            <div class="list-group-item py-3">
-                                <div class="mb-2">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                </div>
-                                <h5 class="mb-1">A must for vinyl lovers!</h5>
-                                <p class="mb-1">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odit sint
-                                    assumenda non possimus dignissimos tenetur, autem, temporibus adipisci enim hic
-                                    culpa, at nostrum minus? Illum deserunt earum nisi est fugiat qui voluptas
-                                    incidunt dicta quo.
-                                </p>
-                            </div>
-                            <div class="list-group-item py-3">
-                                <div class="mb-2">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i>
-                                </div>
-                                <h5 class="mb-1">Great collection!</h5>
-                                <p class="mb-1">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odit sint
-                                    assumenda non possimus dignissimos tenetur, autem, temporibus adipisci enim hic
-                                    culpa, at nostrum minus? Illum deserunt earum nisi est fugiat qui voluptas
-                                    incidunt dicta quo.
-                                </p>
-                            </div>
-                            <div class="list-group-item py-3">
-                                <div class="mb-2">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                </div>
-                                <h5 class="mb-1">Love the vibe of the shop!</h5>
-                                <p class="mb-1">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odit sint
-                                    assumenda non possimus dignissimos tenetur, autem, temporibus adipisci enim hic
-                                    culpa, at nostrum minus? Illum deserunt earum nisi est fugiat qui voluptas
-                                    incidunt dicta quo.
-                                </p>
-                            </div>
-                            <div class="list-group-item py-3">
-                                <div class="mb-2">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i>
-                                </div>
-                                <h5 class="mb-1">Great customer service!</h5>
-                                <p class="mb-1">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odit sint
-                                    assumenda non possimus dignissimos tenetur, autem, temporibus adipisci enim hic
-                                    culpa, at nostrum minus? Illum deserunt earum nisi est fugiat qui voluptas
-                                    incidunt dicta quo.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container-fluid bg-dark p-3">
-            <div class="row justify-content-center align-content-center text-md-center g-2">
-                <a href="#" class="col-md-3 text-decoration-none text-light">About</a>
-                <a href="#" class="col-md-3 text-decoration-none text-light">Copyright</a>
-                <a href="#" class="col-md-3 text-decoration-none text-light">Privacy</a>
-                <a href="#" class="col-md-3 text-decoration-none text-light">Help</a>
-            </div>
-            <p class="text-secondary mt-3 mb-0 text-md-center">© Copyright 2023 Minima Records Inc.</p>
-        </div>
-    </footer>
+            </section>
+        </main>
+        <!-- Footer  -->
+        <%- include('partials/footer.ejs') %>
 </body>
 
 </html>

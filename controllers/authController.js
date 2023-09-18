@@ -74,7 +74,9 @@ const createToken = (id) => {
 module.exports.customer_signup_post = async (req, res) => {
     const { username, password, name, address } = req.body;
     console.log(req.body);
-    const profilePicture = req.file.path;
+    const date = new Date();
+    const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+    const profilePicture = `${formattedDate}-${req.file.originalname}`
     try {
         const customer = await Customer.create({ username, password, profilePicture, name, address })
         const token = createToken(customer._id)
@@ -106,7 +108,9 @@ module.exports.customer_login_post = async (req, res) => {
 module.exports.shipper_signup_post = async (req, res) => {
     const { username, password, shipperName, distributionHub } = req.body;
     console.log(req.body);
-    const profilePicture = req.file.path;
+    const date = new Date();
+    const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+    const profilePicture = `${formattedDate}-${req.file.originalname}`
     try {
         const shipper = await Shipper.create({ username, password, profilePicture, shipperName, distributionHub })
         const token = createToken(shipper._id)
@@ -138,7 +142,9 @@ module.exports.shipper_login_post = async (req, res) => {
 module.exports.vendor_signup_post = async (req, res) => {
     const { username, password, businessName, businessAddress } = req.body;
     console.log(req.body);
-    const profilePicture = req.file.path;
+    const date = new Date();
+    const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+    const profilePicture = `${formattedDate}-${req.file.originalname}`
     try {
         const vendor = await Vendor.create({ username, password, profilePicture, businessName, businessAddress })
         const token = createToken(vendor._id)
