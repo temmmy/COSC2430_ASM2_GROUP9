@@ -65,7 +65,7 @@ module.exports.homepage_get = (req, res) => {
 
 const maxAge = 60 * 60 * 24 * 7;
 const createToken = (id) => {
-    return jwt.sign({ id }, 'customer secret', {
+    return jwt.sign({ id }, 'user secret', {
         expiresIn: maxAge
     })
 }
