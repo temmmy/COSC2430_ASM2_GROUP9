@@ -73,7 +73,7 @@
                             usernameError.textContent = data.errors.username
                             passwordError.textContent = data.errors.password
                         }
-                        if (data.customer || data.shipper) {
+                        if (data.customer || data.shipper || data.vendor) {
                             location.assign('/')
                         }
                     }
