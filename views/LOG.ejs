@@ -9,43 +9,59 @@
         <title>Login</title>
 </head>
 
-<body>
+ <body>
     <%- include('partials/header_home') %>
-        <div class="card col-md-4 mt-5 mb-5 mx-auto">
-            <div class="card-body">
-                <form class="mx-auto">
-                    <div class="card-header text-center mb-4">
-                        <h3>Login</h3>
-                    </div>
-                    <select class="form-select mb-3" name="role" id="role" required>
-                        <option selected>Select</option>
-                        <option value="customer">Customer</option>
-                        <option value="vendor">Vendor</option>
-                        <option value="shipper">Shipper</option>
-                    </select>
-                    <div class="form-group mb-3">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" placeholder="Enter here" />
-                        <div class="username_error text-danger"></div>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter here" />
-                        <div class="password_error text-danger"></div>
-                    </div>
-                    <button type="submit" class="btn btn-dark">
-                        Log In
-                    </button>
-                </form>
+    <main>
+      <div class="card col-md-4 mt-5 mb-5 mx-auto">
+        <div class="card-body">
+          <form class="mx-auto">
+            <div class="card-header text-center mb-4">
+              <h3>Login</h3>
             </div>
+            <select
+              class="form-select mb-3"
+              name="role"
+              id="role"
+              required
+            >
+              <option selected>Select</option>
+              <option value="customer">Customer</option>
+              <option value="vendor">Vendor</option>
+              <option value="shipper">Shipper</option>
+            </select>
+            <div class="form-group mb-3">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="Enter here"
+              />
+              <div class="username_error text-danger"></div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Enter here"
+              />
+              <div class="password_error text-danger"></div>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-dark"
+            >
+              Log In
+            </button>
+          </form>
         </div>
+      </div>
+    </main>
         <!-- Footer  -->
         <%- include('partials/footer.ejs') %>
-            <!-- Boostrap JS -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-                crossorigin="anonymous"></script>
-
+        
             <!-- Custom JS -->
             <script>
                 const form = document.querySelector('form');
@@ -81,6 +97,6 @@
                     }
                 })
             </script>
-</body>
+  </body>
 
 </html>
