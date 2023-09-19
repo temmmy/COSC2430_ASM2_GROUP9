@@ -1,103 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%- include('./partials/link.ejs') %>
-    <script
-      defer
-      src="/js/footer.js"
-    ></script>
-    <title>Login</title>
-  </head>
+        <script defer src="/js/footer.js"></script>
+        <title>Login</title>
+</head>
 
-  <body>
+ <body>
     <%- include('partials/header_home') %>
-    <div class="card col-md-4 mt-5 mb-5 mx-auto">
-      <div class="card-body">
-        <form class="mx-auto">
-          <div class="card-header text-center mb-4">
-            <h3>Login</h3>
-          </div>
-          <select
-            class="form-select mb-3"
-            name="role"
-            id="role"
-            required
-          >
-            <option selected>Select</option>
-            <option value="customer">Customer</option>
-            <option value="vendor">Vendor</option>
-            <option value="shipper">Shipper</option>
-          </select>
-          <div class="form-group mb-3">
-            <label for="username">Username</label>
-            <input
-              type="text"
-              class="form-control"
-              id="username"
-              placeholder="Enter here"
-            />
-            <div class="username_error text-danger"></div>
-          </div>
-          <div class="form-group mb-3">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              placeholder="Enter here"
-            />
-            <div class="password_error text-danger"></div>
-          </div>
-          <button
-            type="submit"
-            class="btn btn-dark"
-          >
-            Log In
-          </button>
-        </form>
+    <main>
+      <div class="card col-md-4 mt-5 mb-5 mx-auto">
+        <div class="card-body">
+          <form class="mx-auto">
+            <div class="card-header text-center mb-4">
+              <h3>Login</h3>
+            </div>
+            <select
+              class="form-select mb-3"
+              name="role"
+              id="role"
+              required
+            >
+              <option selected>Select</option>
+              <option value="customer">Customer</option>
+              <option value="vendor">Vendor</option>
+              <option value="shipper">Shipper</option>
+            </select>
+            <div class="form-group mb-3">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="Enter here"
+              />
+              <div class="username_error text-danger"></div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Enter here"
+              />
+              <div class="password_error text-danger"></div>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-dark"
+            >
+              Log In
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
-    <!-- Footer  -->
-    <%- include('partials/footer.ejs') %>
+    </main>
+        <!-- Footer  -->
+        <%- include('partials/footer.ejs') %>
+        
+            <!-- Custom JS -->
+            <script>
+                const form = document.querySelector('form');
+                const usernameError = document.querySelector('.username_error');
+                const passwordError = document.querySelector('.password_error');
+                form.addEventListener('submit', async (event) => {
+                    event.preventDefault();
 
-    <!-- Custom JS -->
-    <script>
-      const form = document.querySelector('form');
-      const usernameError = document.querySelector('.username_error');
-      const passwordError = document.querySelector('.password_error');
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+                    usernameError.textContent = ' ';
+                    passwordError.textContent = ' ';
 
-        usernameError.textContent = ' ';
-        passwordError.textContent = ' ';
-
-        // getting values from the form
-        const username = form.username.value;
-        const password = form.password.value;
-        const role = form.role.value;
-        try {
-          const res = await fetch(`/${role}LOG`, {
-            method: 'POST',
-            body: JSON.stringify({ username, password }),
-            headers: { 'Content-Type': 'application/json' },
-          });
-          const data = await res.json();
-          if (data.errors) {
-            usernameError.textContent = data.errors.username;
-            passwordError.textContent = data.errors.password;
-          }
-          if (data.customer || data.shipper) {
-            location.assign('/');
-          }
-        } catch (err) {
-          console.log(err);
-        }
-      });
-    </script>
+                    // getting values from the form
+                    const username = form.username.value
+                    const password = form.password.value
+                    const role = form.role.value;
+                    try {
+                        const res = await fetch(`/${role}LOG`, {
+                            method: 'POST',
+                            body: JSON.stringify({ username, password }),
+                            headers: { 'Content-Type': 'application/json' }
+                        })
+                        const data = await res.json()
+                        if (data.errors) {
+                            usernameError.textContent = data.errors.username
+                            passwordError.textContent = data.errors.password
+                        }
+                        if (data.customer || data.shipper) {
+                            location.assign('/')
+                        }
+                    }
+                    catch (err) {
+                        console.log(err);
+                    }
+                })
+            </script>
   </body>
+
 </html>

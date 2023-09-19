@@ -1,4 +1,7 @@
 const jwt = require('jsonwebtoken')
+const Customer = require('../models/Customer')
+const Vendor = require('../models/Vendor')
+const Shipper = require('../models/Shipper')
 
 const requireAuth = (req, res, next) => {
     const token = req.cookies.jwt
@@ -9,7 +12,6 @@ const requireAuth = (req, res, next) => {
             if (err) {
                 console.log(err.message)
                 res.redirect('login')
-
             }
             else {
                 console.log(decodedToken)
@@ -23,22 +25,33 @@ const requireAuth = (req, res, next) => {
 }
 
 // check current  user
-const checkUser = (req, res, nex) => {
-    const token = req.cookies.jwt;
+const checkUser = (req, res, next) => {
+    const token = req.cookies.jwt
 
     if (token) {
-        jwt.verify(token, 'user secret', (err, decodedToken) => {
+        jwt.verify(token, 'user secret', async (err, decodedToken) => {
             if (err) {
                 console.log(err.message)
-                res.redirect('login')
+                res.locals.customer = null
+                res.locals.vendor = null
+                res.locals.shipper = null
                 next()
             }
             else {
                 console.log(decodedToken)
+                let customer = await Customer.findById(decodedToken.id)
+                let vendor = await Vendor.findById(decodedToken.id)
+                let shipper = await shipper.findById(decodedToken.id)
                 next()
             }
         })
     }
+    else {
+        res.locals.customer = null
+        res.locals.vendor = null
+        res.locals.shipper = null
+        next();
+    }
 }
 
-module.exports = { requireAuth };
+module.exports = { requireAuth, checkUser };
