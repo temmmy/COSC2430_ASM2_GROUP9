@@ -41,7 +41,7 @@ const checkUser = (req, res, next) => {
                 console.log(decodedToken)
                 let customer = await Customer.findById(decodedToken.id)
                 let vendor = await Vendor.findById(decodedToken.id)
-                let shipper = await shipper.findById(decodedToken.id)
+                let shipper = await Shipperhipper.findById(decodedToken.id)
                 next()
             }
         })
