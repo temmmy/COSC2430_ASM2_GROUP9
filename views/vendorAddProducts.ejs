@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <%- include('./partials/link.ejs') %>
+    <title>Minima Records | Add an Item</title>
+  </head>
+  <body>
+    <%- include('./partials/header_vendor.ejs') %>
+    <main>
+      <h1 class="display-2">Add a Product</h1>
+      <form
+        action="/vendorAddItem"
+        method="post"
+      ></form>
+    </main>
+    <%- include('./partials/footer.ejs') %>
+  </body>
+</html>
