@@ -164,7 +164,7 @@ module.exports.vendor_login_post = async (req, res) => {
         const vendor = await Vendor.login(username, password)
         const token = createToken(vendor._id)
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
-        res.status(200).json({ customer: vendor._id })
+        res.status(200).json({ vendor: vendor._id })
     }
     catch (err) {
         const errors = handleErrors(err)

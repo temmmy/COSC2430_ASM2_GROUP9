@@ -3,6 +3,10 @@ const Customer = require('../models/Customer')
 const Vendor = require('../models/Vendor')
 const Shipper = require('../models/Shipper')
 
+let customer;
+let vendor;
+let shipper;
+
 const requireAuth = (req, res, next) => {
     const token = req.cookies.jwt
 
@@ -39,9 +43,9 @@ const checkUser = (req, res, next) => {
             }
             else {
                 console.log(decodedToken)
-                let customer = await Customer.findById(decodedToken.id)
-                let vendor = await Vendor.findById(decodedToken.id)
-                let shipper = await shipper.findById(decodedToken.id)
+                customer = await Customer.findById(decodedToken.id)
+                vendor = await Vendor.findById(decodedToken.id)
+                shipper = await Shipper.findById(decodedToken.id)
                 next()
             }
         })
@@ -54,4 +58,30 @@ const checkUser = (req, res, next) => {
     }
 }
 
-module.exports = { requireAuth, checkUser };
+//check who is the current user 
+const checkUserCustomer = async (req, res, next) => {
+    // Check if the user is a customer
+    if (customer) {
+        next()
+    } else {
+        res.redirect('/login');
+    }
+}
+
+const checkUserVendor = async (req, res, next) => {
+    if (vendor) {
+        next()
+    } else {
+        res.redirect('/login');
+    }
+}
+
+const checkUserShipper = async (req, res, next) => {
+    if (shipper) {
+        next()
+    } else {
+        res.redirect('/login');
+    }
+}
+
+module.exports = { requireAuth, checkUser, checkUserCustomer, checkUserVendor, checkUserShipper };
