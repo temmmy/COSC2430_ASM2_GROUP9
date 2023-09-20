@@ -16,7 +16,40 @@
       <form
         action="/vendorAddItem"
         method="post"
-      ></form>
+      >
+        <div class="form-group">
+          <label for="record-name">The title of your record</label>
+          <input
+            type="text"
+            class="form-control"
+            id="record-name"
+          />
+          <label for="artist-name">The artists' name(s)</label>
+          <input
+            type="text"
+            class="form-control"
+            id="artist-name"
+          />
+          <label for="description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+          />
+          <label for="price"></label>
+          <input
+            type="text"
+            class="form-control"
+            id="price"
+          />
+          <label for="image-file"></label>
+          <input
+            type="file"
+            class="form-control"
+            id="image-file"
+          />
+        </div>
+      </form>
     </main>
     <%- include('./partials/footer.ejs') %>
   </body>

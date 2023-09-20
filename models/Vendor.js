@@ -18,6 +18,10 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Please enter the price in dollars'],
   },
+  image: {
+    type: String,
+    required: [true, 'Please add a file'],
+  },
 });
 
 const vendorSchema = new mongoose.Schema({
