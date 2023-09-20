@@ -15,11 +15,11 @@ app.set('view engine', 'ejs');
 
 // database connection
 const dbURI =
-    'mongodb+srv://temmmy:bog132435@users.usjmsq0.mongodb.net/e-commerce?retryWrites=true&w=majority';
+  'mongodb+srv://temmmy:bog132435@users.usjmsq0.mongodb.net/e-commerce?retryWrites=true&w=majority';
 mongoose
-    .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then((result) => app.listen(3000))
-    .catch((err) => console.log(err));
+  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((result) => app.listen(3000))
+  .catch((err) => console.log(err));
 
 // routes
 app.get('*', checkUser)
@@ -30,7 +30,7 @@ app.get('/productsPage', requireAuth, checkUserCustomer, (req, res) => res.rende
 app.get('/productDetailPage', requireAuth, checkUserCustomer, (req, res) => res.render('customerProductDetails'));
 
 // Vendor Pages
-app.get('/myProducts', requireAuth, checkUserVendor, (req, res) => res.render('vendorViewProduts'));
+app.get('/myProducts', requireAuth, checkUserVendor, (req, res) => res.render('vendorViewProducts'));
 app.get('/addProducts', requireAuth, checkUserVendor, (req, res) => res.render('vendorAddProducts'));
 
 
