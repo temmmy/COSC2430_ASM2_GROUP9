@@ -2,12 +2,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
-const { requireAuth, checkUser, checkUserCustomer, checkUserVendor, checkUserShipper } = require('./middleware/authMiddleware');
+const {
+  requireAuth,
+  checkUser,
+  checkUserCustomer,
+  checkUserVendor,
+  checkUserShipper,
+} = require('./middleware/authMiddleware');
 
 const app = express();
 
 // middleware
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -22,17 +29,36 @@ mongoose
   .catch((err) => console.log(err));
 
 // routes
-app.get('*', checkUser)
+app.get('*', checkUser);
 
 app.get('/myAccount', requireAuth, (req, res) => res.render('myAccount'));
 // Customer Pages
-app.get('/productsPage', requireAuth, checkUserCustomer, (req, res) => res.render('customerProducts'));
-app.get('/productDetailPage', requireAuth, checkUserCustomer, (req, res) => res.render('customerProductDetails'));
+app.get('/productsPage', requireAuth, checkUserCustomer, (req, res) =>
+  res.render('customerProducts')
+);
+app.get('/productDetailPage', requireAuth, checkUserCustomer, (req, res) =>
+  res.render('customerProductDetails')
+);
 
 // Vendor Pages
-app.get('/myProducts', requireAuth, checkUserVendor, (req, res) => res.render('vendorViewProducts'));
-app.get('/addProducts', requireAuth, checkUserVendor, (req, res) => res.render('vendorAddProducts'));
+app.get('/myProducts', requireAuth, checkUserVendor, (req, res) =>
+  res.render('vendorViewProducts')
+);
+app.get('/addProducts', requireAuth, checkUserVendor, (req, res) =>
+  res.render('vendorAddProducts')
+);
+app.post('/myProducts', (req, res) => {
+  const product = new Product(req.body);
 
+  product
+    .save()
+    .then((result) => {
+      res.redirect('/myProducts');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 // Shipper Pages
 app.get('/shipperOrders', requireAuth, checkUserShipper, (req, res) => res.render('shipperOrders'));

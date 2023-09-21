@@ -20,7 +20,6 @@ const productSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: [true, 'Please add a file'],
   },
 });
 
@@ -86,5 +85,6 @@ vendorSchema.statics.login = async function (username, password) {
 };
 
 const Vendor = mongoose.model('vendor', vendorSchema);
+const Product = mongoose.model('product', productSchema);
 
 module.exports = Vendor;
