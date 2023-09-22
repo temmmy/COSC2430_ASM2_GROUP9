@@ -1,31 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-<<<<<<< HEAD
-const productSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please enter the name of your vinyl'],
-  },
-  artistName: {
-    type: String,
-    required: ['Please enter the name of the artists'],
-  },
-  description: {
-    type: String,
-    required: [true, 'Describe your product'],
-  },
-  price: {
-    type: Number,
-    required: [true, 'Please enter the price in dollars'],
-  },
-  image: {
-    type: String,
-  },
-});
-
-=======
->>>>>>> 5a6e1e510e1f1ea6c6ef145355600edde0fba2a4
 const vendorSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -49,7 +24,7 @@ const vendorSchema = new mongoose.Schema({
   },
   profilePicture: {
     type: String,
-    required: [true, 'Please, add an image']
+    required: [true, 'Please, add an image'],
   },
   businessName: {
     type: String,
@@ -62,7 +37,7 @@ const vendorSchema = new mongoose.Schema({
     unique: [true, 'Vendor with such address alredy exists'],
     required: [true, 'Please, enter an address'],
     minLength: [5, 'Minimum address length is 5 characters'],
-  }
+  },
 });
 
 vendorSchema.pre('save', async function (next) {
@@ -86,6 +61,5 @@ vendorSchema.statics.login = async function (username, password) {
 };
 
 const Vendor = mongoose.model('vendor', vendorSchema);
-const Product = mongoose.model('product', productSchema);
 
 module.exports = Vendor;

@@ -11,6 +11,10 @@
       defer
       src="js/vendorViewProducts.js"
     ></script>
+    <script
+      defer
+      src="js/footer.js"
+    ></script>
     <title>Minima Records | Your Products</title>
   </head>
 
@@ -18,8 +22,32 @@
     <%- include('./partials/header_vendor.ejs') %>
     <main>
       <section id="hero">
-        <h1 class="display-2">Your Products</h1>
-        <p>Take a look at your uploaded products here</p>
+        <div class="container text-center text-lg-start my-5">
+          <h1 class="display-2">Your Products</h1>
+          <p class="lead">Take a look at your uploaded products here</p>
+        </div>
+        <div class="container-fluid">
+          <button
+            type="button"
+            class="btn btn-outline-dark mb-2"
+            data-bs-toggle="modal"
+            data-bs-target="#static"
+          >
+            Add a new product
+          </button>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Record Name</th>
+                <th scope="col">Artist</th>
+                <th scope="col">Price</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
         <!-- <div class="alert alert-dismissable fade show alert-success" role="alert">
 
           <strong>
@@ -27,14 +55,6 @@
           </strong>
           <button class="btn-close" type="button"></button>
         </div> -->
-        <button
-          type="button"
-          class="btn btn-dark"
-          data-bs-toggle="modal"
-          data-bs-target="#static"
-        >
-          Add a new product
-        </button>
         <div
           class="modal fade"
           id="static"
@@ -125,7 +145,7 @@
                 <div class="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-secondary"
+                    class="btn btn-outline-secondary"
                     data-bs-dismiss="modal"
                   >
                     Cancel
