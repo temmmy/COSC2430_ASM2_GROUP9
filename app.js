@@ -35,7 +35,29 @@ mongoose
 // routes
 app.get('*', checkUser);
 
-app.get('/myAccount', requireAuth, (req, res) => res.render('myAccount'));
+app.get('/myAccount', requireAuth, async (req, res) => {
+  if (token) {
+    jwt.verify(token, 'user secret', async (err, decodedToken) => {
+      if (err) {
+        console.log(err.message)
+      }
+      else {
+        customer = await Customer.findById(decodedToken.id)
+        vendor = await Vendor.findById(decodedToken.id)
+        shipper = await Shipper.findById(decodedToken.id)
+        if (customer) {
+          res.render('myAccount', { customer: customer })
+        }
+        else if (vendor) {
+          res.render('myAccount', { vendor: vendor })
+        }
+        else {
+          res.render('myAccount', { shipper: shipper })
+        }
+      }
+    })
+  }
+});
 // Customer Pages
 app.get('/productsPage', requireAuth, checkUserCustomer, async (req, res) => {
   try {
