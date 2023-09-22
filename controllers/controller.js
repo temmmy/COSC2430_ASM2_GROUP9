@@ -1,12 +1,13 @@
 const Customer = require('../models/Customer')
 const Shipper = require('../models/Shipper')
 const Vendor = require('../models/Vendor')
+const Product = require('../models/Product')
 const jwt = require('jsonwebtoken')
 
-// handling general errors
+// handling general errors for both users and product
 const handleErrors = (err) => {
     console.log(err.message, err.code)
-    let errors = { username: ' ', password: ' ', name: ' ', address: ' ', businessName: ' ', businessAddress: ' ', shipperName: ' ', distributionHub: ' ' };
+    let errors = { username: ' ', password: ' ', name: ' ', address: ' ', businessName: ' ', businessAddress: ' ', shipperName: ' ', distributionHub: ' ', artistName: ' ', description: ' ', price: ' ' };
 
 
     if (err.message === 'incorrect username') {
@@ -16,10 +17,8 @@ const handleErrors = (err) => {
         errors.password = 'The password is incorrect'
     }
     // validation error
-    if (err.message.includes('validation failed')) {
-        Object.values(err.errors).forEach(({ properties }) => {
-            errors[properties.path] = properties.message
-        })
+    if (err.message.includes('product validation failed')) {
+        errors.price = "Incorrect format for the price"
     }
     // duplication error
     if (err.code === 11000) {
@@ -171,6 +170,33 @@ module.exports.vendor_login_post = async (req, res) => {
         res.status(400).json({ errors })
     }
 }
+
+module.exports.vendor_add_product_post = async (req, res) => {
+    const { name, artistName, description, price } = req.body;
+    console.log(req.body);
+    const date = new Date();
+    const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+    const image = `${formattedDate}-${req.file.originalname}`
+    const token = req.cookies.jwt
+    jwt.verify(token, 'user secret', async (err, decodedToken) => {
+        if (err) {
+            console.log(err.message)
+            next()
+        }
+        else {
+            let vendor = decodedToken.id
+            try {
+                const product = await Product.create({ name, artistName, description, price, image, vendor })
+                res.status(201).json({ product: product._id })
+            }
+            catch (err) {
+                const errors = handleErrors(err)
+                res.status(400).json({ errors })
+            }
+        }
+    })
+}
+
 
 module.exports.logout_get = (req, res) => {
     res.cookie('jwt', '', { maxAge: 1 })

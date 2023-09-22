@@ -47,7 +47,8 @@ form.addEventListener('submit', async (event) => {
       distributionHub.textContent = data.errors.distributionHub;
     }
     if (data.shipper) {
-      location.assign('/shipperLOG');
+      let message;
+      message = "Updated Successfully!"
     }
   } catch (err) {
     console.log(err);
