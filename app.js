@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes/routes');
+const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser');
 const {
   requireAuth,
@@ -44,9 +45,20 @@ app.get('/productDetailPage', requireAuth, checkUserCustomer, (req, res) =>
 );
 
 // Vendor Pages
-app.get('/myProducts', requireAuth, checkUserVendor, (req, res) =>
-  res.render('vendorViewProducts')
-);
+app.get('/myProducts', requireAuth, checkUserVendor, async (req, res) => {
+  const token = req.cookies.jwt
+  jwt.verify(token, 'user secret', async (err, decodedToken) => {
+    if (err) {
+      console.log(err.message)
+      next()
+    }
+    else {
+      let vendor = decodedToken.id
+      const products = await Product.find({ vendor: vendor });
+      res.render('vendorViewProducts', { products: products })
+    }
+  })
+});
 
 // Shipper Pages
 app.get('/shipperOrders', requireAuth, checkUserShipper, (req, res) => res.render('shipperOrders'));
