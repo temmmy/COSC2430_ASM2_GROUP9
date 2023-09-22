@@ -37,12 +37,36 @@ app.get('*', checkUser);
 
 app.get('/myAccount', requireAuth, (req, res) => res.render('myAccount'));
 // Customer Pages
-app.get('/productsPage', requireAuth, checkUserCustomer, (req, res) =>
-  res.render('customerProducts')
+app.get('/productsPage', requireAuth, checkUserCustomer, async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.render('customerProducts', { products: products })
+    if (!products) {
+      // Handle the case where the product doesn't exist
+      return res.status(404).render('error404');
+    }
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).send('Internal Server Error');
+  }
+}
 );
-app.get('/productDetailPage', requireAuth, checkUserCustomer, (req, res) =>
-  res.render('customerProductDetails')
-);
+
+app.get('/productDetailPage/:productId', requireAuth, checkUserCustomer, async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      // Handle the case where the product doesn't exist
+      return res.status(404).render('error404');
+    }
+    res.render('customerProductDetails', { product: product });
+  } catch (error) {
+    console.error('Error fetching product details:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 // Vendor Pages
 app.get('/myProducts', requireAuth, checkUserVendor, async (req, res) => {
@@ -53,10 +77,19 @@ app.get('/myProducts', requireAuth, checkUserVendor, async (req, res) => {
       next();
     } else {
       let vendor = decodedToken.id;
-      const products = await Product.find({ vendor: vendor });
-      res.render('vendorViewProducts', { products: products });
+      try {
+        const products = await Product.find({ vendor: vendor });
+        res.render('vendorViewProducts', { products: products });
+        if (!products) {
+          // Handle the case where the product doesn't exist
+          return res.status(404).render('error404');
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).send('Internal Server Error');
+      }
     }
-  });
+  })
 });
 
 // Shipper Pages
