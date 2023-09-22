@@ -26,7 +26,11 @@ router.post('/shipperLOG', controller.shipper_login_post)
 
 router.get('/logout', controller.logout_get)
 
-// Routes for adding product (vendor)
+// Route for adding product (vendor)
 router.post('/addProduct', upload.single('image'), controller.vendor_add_product_post)
+// Route for deleing product (vendor)
+router.get('/delete/:id', controller.vendor_delete_product_get)
+// Route for editing product (vendor)
+// router.post('/edit/:id', controller.vendor_edit_product_post)
 
 module.exports = router
