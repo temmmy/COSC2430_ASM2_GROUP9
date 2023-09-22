@@ -7,9 +7,30 @@
       content="width=device-width, initial-scale=1.0"
     />
     <%- include('./partials/link.ejs') %>
-    <title>Minima Records | /productname/</title>
+    <title>Minima Records | <%= product.name %></title>
   </head>
   <body>
-    <%- include('./partials/header_customer.ejs') %> <%- include('./partials/footer.ejs') %>
+    <%- include('./partials/header_customer.ejs') %>
+    <main>
+      <div class="container">
+        <div class="row align-items-center mt-5">
+          <img
+            src="/images/<%= product.image %>"
+            alt="<%= product.name %>"
+            class="col-12 col-lg-6"
+          />
+          <div class="col-12 col-lg-6 px-4">
+            <h1 class="display-3"><%= product.name %></h1>
+            <h2 class="h3"><%= product.artistName %></h2>
+            <div class="d-flex flex-column align-items-start mt-5">
+              <h1 class="display-3 fw-bold mb-3">$<%= product.price %></h1>
+              <button class="btn btn-dark btn-lg rounded-pill">Add to Cart</button>
+            </div>
+          </div>
+          <p class="lead my-5 px-4"><%= product.description %></p>
+        </div>
+      </div>
+    </main>
+    <%- include('./partials/footer.ejs') %>
   </body>
 </html>
