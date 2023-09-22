@@ -24,7 +24,7 @@ const vendorSchema = new mongoose.Schema({
   },
   profilePicture: {
     type: String,
-    required: [true, 'Please, add an image']
+    required: [true, 'Please, add an image'],
   },
   businessName: {
     type: String,
@@ -37,7 +37,7 @@ const vendorSchema = new mongoose.Schema({
     unique: [true, 'Vendor with such address alredy exists'],
     required: [true, 'Please, enter an address'],
     minLength: [5, 'Minimum address length is 5 characters'],
-  }
+  },
 });
 
 vendorSchema.pre('save', async function (next) {

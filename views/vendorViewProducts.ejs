@@ -1,21 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <%- include('./partials/link.ejs') %>
-    <script defer src="js/vendorViewProducts.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <%- include('./partials/link.ejs') %>
+    <script
+      defer
+      src="js/vendorViewProducts.js"
+    ></script>
+    <script
+      defer
+      src="js/footer.js"
+    ></script>
     <title>Minima Records | Your Products</title>
-</head>
+  </head>
 
-<body>
-  <%- include('./partials/header_vendor.ejs') %>
+  <body>
+    <%- include('./partials/header_vendor.ejs') %>
     <main>
       <section id="hero">
-
-        <h1 class="display-2">Your Products</h1>
-        <p>Take a look at your uploaded products here</p>
+        <div class="container text-center text-lg-start my-5">
+          <h1 class="display-2">Your Products</h1>
+          <p class="lead">Take a look at your uploaded products here</p>
+        </div>
+        <div class="container-fluid">
+          <button
+            type="button"
+            class="btn btn-outline-dark mb-2"
+            data-bs-toggle="modal"
+            data-bs-target="#static"
+          >
+            Add a new product
+          </button>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Record Name</th>
+                <th scope="col">Artist</th>
+                <th scope="col">Price</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
         <!-- <div class="alert alert-dismissable fade show alert-success" role="alert">
 
           <strong>
@@ -23,48 +55,108 @@
           </strong>
           <button class="btn-close" type="button"></button>
         </div> -->
-        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#static">
-          Add a new product
-        </button>
-        <div class="modal fade" id="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-          aria-hidden="true">
+        <div
+          class="modal fade"
+          id="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">New Product</h5>
+                <h5
+                  class="modal-title"
+                  id="staticBackdropLabel"
+                >
+                  New Product
+                </h5>
               </div>
-              <form class="mx-auto" method="post" enctype="multipart/form-data">
+              <form
+                class="mx-auto"
+                method="post"
+                enctype="multipart/form-data"
+              >
                 <div class="form-group mt-3 mb-3">
                   <label for="name">The title of your record</label>
-                  <input type="text" class="form-control" name="name" id="name" placeholder="Enter here" required />
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    id="name"
+                    placeholder="Enter here"
+                    required
+                  />
                   <div class="name_error text-danger"></div>
                 </div>
                 <div class="form-group mb-3">
                   <label for="artistName">The artists' name(s)</label>
-                  <input type="text" class="form-control" name="artistName" id="artistName" placeholder="Enter here"
-                    required />
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="artistName"
+                    id="artistName"
+                    placeholder="Enter here"
+                    required
+                  />
                   <div class="artistName_error text-danger"></div>
                 </div>
 
                 <div class="form-group mb-3">
                   <label for="description">Description</label>
-                  <textarea type="text" class="form-control" name="description" id="description"
-                    placeholder="Enter here" required rows="3"></textarea>
+                  <textarea
+                    type="text"
+                    class="form-control"
+                    name="description"
+                    id="description"
+                    placeholder="Enter here"
+                    required
+                    rows="3"
+                  ></textarea>
                   <div class="description_error text-danger"></div>
                 </div>
                 <div class="form-group mb-3">
                   <label for="price">Price</label>
-                  <input type="price" class="form-control" name="price" id="price" placeholder="Enter here" required />
+                  <input
+                    type="price"
+                    class="form-control"
+                    name="price"
+                    id="price"
+                    placeholder="Enter here"
+                    required
+                  />
                   <div class="price_error text-danger"></div>
                 </div>
                 <div class="mb-3">
-                  <label for="image" class="form-label">The record's image</label>
-                  <input class="form-control" name="image" type="file" id="image" />
+                  <label
+                    for="image"
+                    class="form-label"
+                    >The record's image</label
+                  >
+                  <input
+                    class="form-control"
+                    name="image"
+                    type="file"
+                    id="image"
+                  />
                   <div class="image_error text-danger"></div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Confirm</button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-dark"
+                    data-bs-dismiss="modal"
+                  >
+                    Confirm
+                  </button>
                 </div>
               </form>
             </div>
@@ -73,6 +165,5 @@
       </section>
     </main>
     <%- include('./partials/footer.ejs') %>
-</body>
-
+  </body>
 </html>
