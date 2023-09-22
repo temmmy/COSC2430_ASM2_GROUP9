@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const authRoutes = require('./routes/authRoutes');
+const routes = require('./routes/routes');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser, checkUserCustomer, checkUserVendor, checkUserShipper } = require('./middleware/authMiddleware');
 
@@ -31,8 +31,6 @@ app.get('/productDetailPage', requireAuth, checkUserCustomer, (req, res) => res.
 
 // Vendor Pages
 app.get('/myProducts', requireAuth, checkUserVendor, (req, res) => res.render('vendorViewProducts'));
-app.get('/addProducts', requireAuth, checkUserVendor, (req, res) => res.render('vendorAddProducts'));
-
 
 // Shipper Pages
 app.get('/shipperOrders', requireAuth, checkUserShipper, (req, res) => res.render('shipperOrders'));
@@ -49,4 +47,4 @@ app.get('/login', (req, res) => res.render('LOG'));
 app.get('/customerLOG', (req, res) => res.render('LOG'));
 app.get('/vendorLOG', (req, res) => res.render('LOG'));
 app.get('/shipperLOG', (req, res) => res.render('LOG'));
-app.use(authRoutes);
+app.use(routes);

@@ -18,7 +18,6 @@ const requireAuth = (req, res, next) => {
                 res.redirect('login')
             }
             else {
-                console.log(decodedToken)
                 next()
             }
         })
@@ -42,7 +41,6 @@ const checkUser = (req, res, next) => {
                 next()
             }
             else {
-                console.log(decodedToken)
                 customer = await Customer.findById(decodedToken.id)
                 vendor = await Vendor.findById(decodedToken.id)
                 shipper = await Shipper.findById(decodedToken.id)
