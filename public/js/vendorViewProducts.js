@@ -46,6 +46,9 @@ form.addEventListener('submit', async (event) => {
             priceError.textContent = data.errors.price;
             imageError.textContent = data.errors.image;
         }
+        else {
+            location.reload();
+        }
     } catch (err) {
         console.log(err);
     }

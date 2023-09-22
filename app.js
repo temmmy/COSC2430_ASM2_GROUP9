@@ -9,6 +9,9 @@ const {
   checkUserVendor,
   checkUserShipper,
 } = require('./middleware/authMiddleware');
+const Product = require('./models/Product')
+const Vendor = require('./models/Vendor')
+const Shipper = require('./models/Shipper')
 
 const app = express();
 
