@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
+<<<<<<< HEAD
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -23,6 +24,8 @@ const productSchema = new mongoose.Schema({
   },
 });
 
+=======
+>>>>>>> 5a6e1e510e1f1ea6c6ef145355600edde0fba2a4
 const vendorSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -46,6 +49,7 @@ const vendorSchema = new mongoose.Schema({
   },
   profilePicture: {
     type: String,
+    required: [true, 'Please, add an image']
   },
   businessName: {
     type: String,
@@ -58,10 +62,7 @@ const vendorSchema = new mongoose.Schema({
     unique: [true, 'Vendor with such address alredy exists'],
     required: [true, 'Please, enter an address'],
     minLength: [5, 'Minimum address length is 5 characters'],
-  },
-  products: {
-    type: [productSchema],
-  },
+  }
 });
 
 vendorSchema.pre('save', async function (next) {
