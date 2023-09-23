@@ -10,6 +10,33 @@
     <title>Your Orders</title>
   </head>
   <body>
-    <%- include('./partials/header_shipper.ejs') %> <%- include('./partials/footer.ejs') %>
+    <%- include('./partials/header_shipper.ejs') %>
+    <main>
+      <div class="container text-center text-lg-start my-5">
+        <h1 class="display-2">Available Orders</h1>
+        <p class="lead">Take a look at all the orders in your distribution hub</p>
+      </div>
+      <div class="container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">No.</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Total Price</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+              <td class="align-middle"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <%- include('./partials/footer.ejs') %>
   </body>
 </html>
