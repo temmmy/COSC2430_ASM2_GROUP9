@@ -13,6 +13,7 @@ const {
 const Product = require('./models/Product');
 const Vendor = require('./models/Vendor');
 const Shipper = require('./models/Shipper');
+const Customer = require('./models/Customer');
 
 const app = express();
 
@@ -36,33 +37,31 @@ mongoose
 app.get('*', checkUser);
 
 app.get('/myAccount', requireAuth, async (req, res) => {
+  const token = req.cookies.jwt;
   if (token) {
     jwt.verify(token, 'user secret', async (err, decodedToken) => {
       if (err) {
-        console.log(err.message)
-      }
-      else {
-        customer = await Customer.findById(decodedToken.id)
-        vendor = await Vendor.findById(decodedToken.id)
-        shipper = await Shipper.findById(decodedToken.id)
+        console.log(err.message);
+      } else {
+        customer = await Customer.findById(decodedToken.id);
+        vendor = await Vendor.findById(decodedToken.id);
+        shipper = await Shipper.findById(decodedToken.id);
         if (customer) {
-          res.render('myAccount', { customer: customer })
-        }
-        else if (vendor) {
-          res.render('myAccount', { vendor: vendor })
-        }
-        else {
-          res.render('myAccount', { shipper: shipper })
+          res.render('myAccount', { customer: customer });
+        } else if (vendor) {
+          res.render('myAccount', { vendor: vendor });
+        } else {
+          res.render('myAccount', { shipper: shipper });
         }
       }
-    })
+    });
   }
 });
 // Customer Pages
 app.get('/productsPage', requireAuth, checkUserCustomer, async (req, res) => {
   try {
     const products = await Product.find();
-    res.render('customerProducts', { products: products })
+    res.render('customerProducts', { products: products });
     if (!products) {
       // Handle the case where the product doesn't exist
       return res.status(404).render('error404');
@@ -71,8 +70,7 @@ app.get('/productsPage', requireAuth, checkUserCustomer, async (req, res) => {
     console.error('Error fetching products:', error);
     res.status(500).send('Internal Server Error');
   }
-}
-);
+});
 
 app.get('/productDetailPage/:productId', requireAuth, checkUserCustomer, async (req, res) => {
   try {
@@ -111,7 +109,7 @@ app.get('/myProducts', requireAuth, checkUserVendor, async (req, res) => {
         res.status(500).send('Internal Server Error');
       }
     }
-  })
+  });
 });
 
 // Shipper Pages
