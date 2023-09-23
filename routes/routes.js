@@ -31,6 +31,6 @@ router.post('/addProduct', upload.single('image'), controller.vendor_add_product
 // Route for deleing product (vendor)
 router.get('/delete/:id', controller.vendor_delete_product_get)
 // Route for editing product (vendor)
-// router.post('/edit/:id', controller.vendor_edit_product_post)
+router.post('/editProduct/:id', upload.single('image'), controller.vendor_edit_product_post)
 
 module.exports = router

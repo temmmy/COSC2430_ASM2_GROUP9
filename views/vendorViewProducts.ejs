@@ -32,6 +32,8 @@
                 <th scope="col">Price $</th>
                 <th scope="col">Actions</th>
               </tr>
+            </thead>
+            <tbody>
               <% products.slice().reverse().forEach(function(product, i) { %>
                 <tr>
                   <td class="align-middle">
@@ -50,8 +52,11 @@
                     <%= product.price %> $
                   </td>
                   <td class="align-middle">
-                    <button type="button" class="btn btn-outline-dark border-0 mb-2" data-bs-toggle="modal"
-                      data-bs-target="#editModal">
+                    <button type="button" class="btn btn-outline-dark border-0 mb-2 edit-btn" data-bs-toggle="modal"
+                      data-bs-target="#editModal" data-bs-toggle="modal" data-bs-target="#editModal"
+                      data-name="<%= product.name %>" data-artistName="<%= product.artistName %>"
+                      data-description="<%= product.description %>" data-price="<%= product.price %>"
+                      data-image="<%= product.image %>" data-id="<%= product._id %>">
                       <i class="bi bi-pencil-square mx-2"></i>
                     </button>
                     <a class="link-secondary" href="/delete/<%=product._id%> "><button type="button"
@@ -59,17 +64,10 @@
                   </td>
                 </tr>
                 <% }) %>
-            </thead>
-            <tbody></tbody>
+            </tbody>
           </table>
         </div>
-        <!-- <div class="alert alert-dismissable fade show alert-success" role="alert">
-
-          <strong>
-            Product added successfully!
-          </strong>
-          <button class="btn-close" type="button"></button>
-        </div> -->
+        <!-- Add Product -->
         <div class="modal fade" id="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
           aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
@@ -106,7 +104,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="image" class="form-label">The record's image</label>
-                  <input class="form-control" name="image" type="file" id="image" />
+                  <input class="form-control" name="image" type="file" id="image" required />
                   <div class="image_error text-danger"></div>
                 </div>
                 <div class="modal-footer">
@@ -121,7 +119,13 @@
             </div>
           </div>
         </div>
+        <!-- <div class="alert alert-dismissable fade show alert-success" role="alert">
 
+          <strong>
+            Product added successfully!
+          </strong>
+          <button class="btn-close" type="button"></button>
+        </div> -->
         <!-- Edit Modal -->
         <div class="modal fade" id="editModal" data-bs-keyboard="false" tabindex="-1"
           aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -135,33 +139,39 @@
               <form id="editForm" class="mx-auto" method="post" enctype="multipart/form-data">
                 <div class="form-group mt-3 mb-3">
                   <label for="name">The title of your record</label>
-                  <input type="text" class="form-control" name="name" id="name" placeholder="Enter here" required />
+                  <input type="text" class="form-control" name="EditName" id="EditName" placeholder="Enter here"
+                    required />
                   <div class="name_error text-danger"></div>
                 </div>
                 <div class="form-group mb-3">
                   <label for="artistName">The artists' name(s)</label>
-                  <input type="text" class="form-control" name="artistName" id="artistName" placeholder="Enter here"
-                    required />
+                  <input type="text" class="form-control" name="EditArtistName" id="EditArtistName"
+                    placeholder="Enter here" required />
                   <div class="artistName_error text-danger"></div>
                 </div>
 
                 <div class="form-group mb-3">
                   <label for="description">Description</label>
-                  <textarea type="text" class="form-control" name="description" id="description"
+                  <textarea type="text" class="form-control" name="EditDescription" id="EditDescription"
                     placeholder="Enter here" required rows="3"></textarea>
                   <div class="description_error text-danger"></div>
                 </div>
                 <div class="form-group mb-3">
                   <label for="price">Price</label>
-                  <input type="price" class="form-control" name="price" id="price" placeholder="Enter here (in dollars)"
-                    required />
+                  <input type="price" class="form-control" name="EditPrice" id="EditPrice"
+                    placeholder="Enter here (in dollars)" required />
                   <div class="price_error text-danger"></div>
                 </div>
                 <div class="mb-3">
                   <label for="image" class="form-label">The record's image</label>
-                  <input class="form-control" name="image" type="file" id="image" />
+                  <input class="form-control" name="image" type="file" id="EditImage" />
                   <div class="image_error text-danger"></div>
+                  <div class="my-3 d-flex justify-content-center" id="Preview"></div>
                 </div>
+                <div class="form-group d-hidden"><input type="text" class="form-control d-none" name="productID"
+                    id="productID" /></div>
+                <div class="form-group d-hidden"><input type="text" class="form-control d-none" name="oldImage"
+                    id="oldImage" /></div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     Cancel

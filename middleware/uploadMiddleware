@@ -21,7 +21,7 @@ var upload = multer({
         ) {
             callback(null, true)
         } else {
-            console.log('only jpg & png file supported!')
+            console.log('only jpg, png & webp file supported!')
             console.log(file.mimetype)
             callback(null, false)
         }
