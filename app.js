@@ -127,4 +127,5 @@ app.get('/login', (req, res) => res.render('LOG'));
 app.get('/customerLOG', (req, res) => res.render('LOG'));
 app.get('/vendorLOG', (req, res) => res.render('LOG'));
 app.get('/shipperLOG', (req, res) => res.render('LOG'));
+app.get('/shoppingcart', (req, res) => res.render('shoppingcart'));
 app.use(routes);
