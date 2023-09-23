@@ -32,6 +32,11 @@ const handleErrors = (err) => {
     if (err.message.includes('product validation failed')) {
         errors.price = 'Incorrect format for the price';
     }
+
+    if (err.message.includes('CastError: Cast to Number')) {
+        errors.price = 'Incorrect format for the price';
+    }
+
     // duplication error
     if (err.code === 11000) {
         if (Object.keys(err.keyPattern)[0] == 'username') {
@@ -236,6 +241,50 @@ module.exports.vendor_delete_product_get = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while deleting the product' });
     }
 }
+
+module.exports.vendor_edit_product_post = async (req, res) => {
+    try {
+        const { name, artistName, description, price, oldImage } = req.body;
+        const id = req.params.id
+        console.log(req.body);
+        const date = new Date();
+        const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+        let image;
+        if (req.file) {
+            image = `${formattedDate}-${req.file.originalname}`;
+            try {
+                fs.unlinkSync('./public/images/' + oldImage);
+            } catch (err) {
+            }
+            try {
+                const result = await Product.findByIdAndUpdate(id, {
+                    name: name,
+                    artist: artistName,
+                    description: description,
+                    price: price,
+                    image: image
+                });
+                res.status(201).json({ product: " " })
+            } catch {
+                const errors = handleErrors(err);
+                res.status(400).json({ errors });
+            }
+        }
+        else {
+            const result = await Product.findByIdAndUpdate(id, {
+                name: name,
+                artist: artistName,
+                description: description,
+                price: price,
+            });
+            res.status(201).json({ product: " " })
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'An error occurred while editing the product' });
+    }
+}
+// }
 
 module.exports.logout_get = (req, res) => {
     res.cookie('jwt', '', { maxAge: 1 });
