@@ -334,3 +334,7 @@ module.exports.logout_get = (req, res) => {
     })
     res.redirect('/');
 };
+
+module.exports.customer_add_order_post = async (req, res) => {
+
+}
