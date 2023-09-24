@@ -3,6 +3,7 @@ const Shipper = require('../models/Shipper');
 const Vendor = require('../models/Vendor');
 const Product = require('../models/Product');
 const jwt = require('jsonwebtoken');
+const session = require('express-session');
 const fs = require('fs');
 
 // handling general errors for both users and product
@@ -286,7 +287,50 @@ module.exports.vendor_edit_product_post = async (req, res) => {
 }
 // }
 
+module.exports.customer_add_to_cart_post = (req, res) => {
+    const product_id = req.body.product_id
+    const product_name = req.body.product_name
+    const product_price = req.body.product_price
+
+    if (!req.session.cart) {
+        req.session.cart = [];
+    }
+
+    let count = 0;
+    for (let i = 0; i < req.session.cart.length; i++) {
+        if (req.session.cart[i].product_id === product_id) {
+            req.session.cart[i].quantity += 1;
+            count++;
+        }
+    }
+    if (count === 0) {
+        const cart_data = {
+            product_id: product_id,
+            product_name: product_name,
+            product_price: product_price,
+            quantity: 1
+        };
+        req.session.cart.push(cart_data);
+    }
+
+    res.redirect("/shoppingCart")
+}
+
+module.exports.customer_remove_item_get = (req, res) => {
+    const product_id = req.params.id;
+    for (let i = 0; i < req.session.cart.length; i++) {
+        if (req.session.cart[i].product_id === product_id) {
+            req.session.cart.splice(i, 1);
+        }
+    }
+    res.redirect("/shoppingCart")
+}
+
 module.exports.logout_get = (req, res) => {
     res.cookie('jwt', '', { maxAge: 1 });
+    console.log
+    req.session.destroy(function (err) {
+        // cannot access session here
+    })
     res.redirect('/');
 };

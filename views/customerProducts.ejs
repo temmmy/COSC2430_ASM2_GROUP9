@@ -1,85 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <%- include('./partials/link.ejs') %>
-    <title>Minima Records | Products</title>
-    <script
-      defer
-      src="js/customerProducts.js"
-    ></script>
-  </head>
 
-  <body>
-    <%- include('./partials/header_customer.ejs') %>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('./partials/link.ejs') %>
+    <title>Minima Records | Products</title>
+    <script defer src="js/customerProducts.js"></script>
+</head>
+
+<body>
+  <%- include('./partials/header_customer.ejs') %>
     <main>
       <section class="container text-center">
         <div class="container text-center text-lg-start my-5">
           <h1 class="display-2">Products</h1>
           <p class="lead">Take a look at all of our offers</p>
-          <form
-            class="form-inline d-flex"
-            type="search"
-            placeholder="Search"
-          >
-            <input
-              class="form-control"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
+          <form class="form-inline d-flex" type="search" placeholder="Search">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
           </form>
-          <div
-            class="accordion mt-4"
-            id="filter"
-          >
+          <div class="accordion mt-4" id="filter">
             <div class="accordion-item">
-              <h2
-                class="accordion-header"
-                id="filterByPrice"
-              >
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#filterPrice"
-                  aria-expanded="false"
-                  aria-controls="filterPrice"
-                >
+              <h2 class="accordion-header" id="filterByPrice">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#filterPrice" aria-expanded="false" aria-controls="filterPrice">
                   Filter by Price
                 </button>
               </h2>
-              <div
-                id="filterPrice"
-                class="accordion-collapse collapse"
-                aria-labelledby="filterPrice"
-                data-bs-parent="#filter"
-              >
+              <div id="filterPrice" class="accordion-collapse collapse" aria-labelledby="filterPrice"
+                data-bs-parent="#filter">
                 <div class="accordion-body">
                   <form>
                     <div class="form-group text-start mb-3">
                       <label for="minPrice">Minimum Price</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="minPrice"
-                        aria-describedby="minPrice"
-                        placeholder="Enter here"
-                      />
+                      <input type="text" class="form-control" id="minPrice" aria-describedby="minPrice"
+                        placeholder="Enter here" />
                     </div>
                     <div class="form-group text-start">
                       <label for="maxPrice">Maximum Price</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="maxPrice"
-                        aria-describedby="maxPrice"
-                        placeholder="Enter here"
-                      />
+                      <input type="text" class="form-control" id="maxPrice" aria-describedby="maxPrice"
+                        placeholder="Enter here" />
                     </div>
                   </form>
                 </div>
@@ -91,31 +51,35 @@
       <section class="container mb-5">
         <div class="row justify-content-start g-3">
           <% products.forEach(product=> { %>
-          <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
-            <div class="card px-3">
-              <a href="/productDetailPage/<%= product._id %>">
-                <img
-                  src="/images/<%= product.image %>"
-                  alt="<%= product.name %>"
-                  class="ratio ratio-1x1"
-                />
-              </a>
-              <div class="card-body text-center">
-                <h4 class="card-title overflow-hidden"><%= product.name %></h4>
-                <p class="lead card-subtitle"><%= product.artistName %></p>
-                <p class="display-5 my-4 text-muted fw-bold">$<%= product.price %></p>
-                <a
-                  href="#"
-                  class="btn btn-outline-dark btn-lg my-2 rounded-pill"
-                  >Add to Cart</a
-                >
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+              <div class="card px-3">
+                <a href="/productDetailPage/<%= product._id %>">
+                  <img src="/images/<%= product.image %>" alt="<%= product.name %>" class="ratio ratio-1x1" />
+                </a>
+                <div class="card-body text-center">
+                  <h4 class="card-title overflow-hidden">
+                    <%= product.name %>
+                  </h4>
+                  <p class="lead card-subtitle">
+                    <%= product.artistName %>
+                  </p>
+                  <p class="display-5 my-4 text-muted fw-bold">$<%= product.price %>
+                  </p>
+                  <!-- <a href="/addToCart" class="btn btn-outline-dark btn-lg my-2 rounded-pill">Add to Cart</a> -->
+                  <form method="post" action="/addToCart">
+                    <input type="hidden" name="product_id" value="<%= product._id %>">
+                    <input type="hidden" name="product_name" value="<%= product.name %>">
+                    <input type="hidden" name="product_price" value="<%= product.price %>">
+                    <button type="submit" class="btn btn-outline-dark btn-lg my-2 rounded-pill">Add to Cart</a>
+                  </form>
+                </div>
               </div>
             </div>
-          </div>
-          <% }) %>
+            <% }) %>
         </div>
       </section>
     </main>
     <%- include('./partials/footer.ejs') %>
-  </body>
+</body>
+
 </html>
