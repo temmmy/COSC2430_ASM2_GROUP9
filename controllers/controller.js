@@ -404,17 +404,31 @@ module.exports.customer_add_order_post = async (req, res) => {
         jwt.verify(token, 'user secret', async (err, decodedToken) => {
             id = decodedToken.id
             customer = await Customer.findById(id)
+            customerName = customer.name;
             try {
                 const order = await Order.create({
+                    'customer': customerName,
                     'products': products,
                     'status': "Active",
                     'distributionHub': distributionHub,
                     'totalPrice': total
                 });
+                req.session.cart = []
                 res.status(201).json({ order: order._id });
             } catch (err) {
-                res.status(400).json({ errors });
+                res.status(400).json({ err });
             }
         })
     }
 }
+
+module.exports.shipper_edit_status_post = async (req, res) => {
+    const { id, newStatus } = req.body;
+    try {
+        const result = await Order.findByIdAndUpdate(id, { status: newStatus })
+        res.status(201).json({ order: id });
+    } catch (err) {
+        console.log(err)
+        res.status(400).json({ err });
+    }
+} 

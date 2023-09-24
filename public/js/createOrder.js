@@ -18,7 +18,7 @@ form.addEventListener('submit', async (event) => {
         if (data.errors) {
         }
         else {
-            location.reload();
+            location.assign('/orderConfirmation')
         }
     } catch (err) {
         console.log(err);

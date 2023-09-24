@@ -42,8 +42,13 @@ router.post('/addOrder', controller.customer_add_order_post)
 
 router.post('/updateProfilePicture', upload.single('image'), controller.user_change_profile_picture_post)
 
+// Route for editting status (Shipper)
+router.post('/editStatus', controller.shipper_edit_status_post)
+
 // Route for logging out (everyone)
 router.get('/logout', controller.logout_get)
+
+
 
 
 module.exports = router

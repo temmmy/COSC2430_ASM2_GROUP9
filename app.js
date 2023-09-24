@@ -15,6 +15,7 @@ const Product = require('./models/Product');
 const Vendor = require('./models/Vendor');
 const Shipper = require('./models/Shipper');
 const Customer = require('./models/Customer');
+const Order = require('./models/Order')
 
 const app = express();
 
@@ -122,6 +123,8 @@ app.get('/shoppingCart', requireAuth, checkUserCustomer, async (req, res) => {
   res.render('customerShoppingCart', { cart: req.session.cart });
 });
 
+app.get('/orderConfirmation', requireAuth, checkUserCustomer, (req, res) => res.render('thankYou'));
+
 // Vendor Pages
 app.get('/myProducts', requireAuth, checkUserVendor, async (req, res) => {
   const token = req.cookies.jwt;
@@ -147,7 +150,25 @@ app.get('/myProducts', requireAuth, checkUserVendor, async (req, res) => {
 });
 
 // Shipper Pages
-app.get('/shipperOrders', requireAuth, checkUserShipper, (req, res) => res.render('shipperOrders'));
+app.get('/shipperOrders', requireAuth, checkUserShipper, async (req, res) => {
+  const token = req.cookies.jwt;
+  jwt.verify(token, 'user secret', async (err, decodedToken) => {
+    if (err) {
+      console.log(err.message);
+      next();
+    } else {
+      let id = decodedToken.id;
+      try {
+        const shipper = await Shipper.findById(id)
+        const orders = await Order.find({ distributionHub: shipper.distributionHub });
+        res.render('shipperOrders', { orders: orders });
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).send('Internal Server Error');
+      }
+    }
+  });
+});
 
 app.get('/about', (req, res) => res.render('about'));
 app.get('/copyright', (req, res) => res.render('copyright'));
@@ -160,7 +181,6 @@ app.get('/login', (req, res) => res.render('LOG'));
 app.get('/customerLOG', (req, res) => res.render('LOG'));
 app.get('/vendorLOG', (req, res) => res.render('LOG'));
 app.get('/shipperLOG', (req, res) => res.render('LOG'));
-app.get('/orderConfirmation', (req, res) => res.render('thankYou'));
 app.use(routes);
 
 app.use((req, res) => {
