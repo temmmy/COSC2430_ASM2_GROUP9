@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <%- include('./partials/link.ejs') %>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('./partials/link.ejs') %>
     <title>Your Orders</title>
-  </head>
-  <body class="flex-wrapper">
-    <%- include('./partials/header_shipper.ejs') %>
+    <script defer src="js/editStatus.js"></script>
+</head>
+
+<body class="flex-wrapper">
+  <%- include('./partials/header_shipper.ejs') %>
     <main>
       <div class="container text-center text-lg-start my-5">
         <h1 class="display-2">Available Orders</h1>
@@ -22,21 +22,73 @@
             <tr>
               <th scope="col">No.</th>
               <th scope="col">Customer</th>
+              <th scope="col">Hub</th>
               <th scope="col">Total Price</th>
               <th scope="col">Status</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="align-middle"></td>
-              <td class="align-middle"></td>
-              <td class="align-middle"></td>
-              <td class="align-middle"></td>
-            </tr>
+            <% orders.slice().reverse().forEach(function(order, i) { %>
+              <tr>
+                <td class="align-middle">
+                  <%= i %>
+                </td>
+                <td class="align-middle">
+                  <%= order.customer %>
+                </td>
+                <td class="align-middle">
+                  <%= order.distributionHub %>
+                </td>
+                <td class="align-middle">$ <%= order.totalPrice %>
+                </td>
+                <td class="align-middle">
+                  <%= order.status %>
+                </td>
+                <td class="align-middle">
+                  <button type="button" class="btn btn-outline-dark border-0 mb-2 edit-btn data" data-bs-toggle="modal"
+                    data-bs-target="#editModal" data-bs-toggle="modal" data-bs-target="#editModal" data-id=<%=order._id
+                    %> data-status = <%= order.status %>>
+                      <i class="bi bi-pencil-square mx-2"></i>
+                  </button>
+                </td>
+              </tr>
+              <% }) %>
           </tbody>
         </table>
+        <div class="modal fade" id="editModal" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">
+                  Edit Status
+                </h5>
+              </div>
+              <form id="editForm" class="mx-auto" method="post" enctype="multipart/form-data">
+                <div class="form-group mt-3 mb-3">
+                  <select name="distributionHub" id="distributionHub" class="form-select"
+                    aria-label="Assigned Distribution Hub" required>
+                    <option selected value="Active">Active</option>
+                    <option value="Closed">Closed</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </select>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn btn-dark">
+                    Save
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
     <%- include('./partials/footer.ejs') %>
-  </body>
+</body>
+
 </html>
