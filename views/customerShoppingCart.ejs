@@ -1,21 +1,27 @@
+<!-- RMIT University Vietnam
+Course: COSC2430 Web Programming
+Semester: 2023B
+Assessment: Assignment 2
+Authors: 
+Nguyen Chi Nghia (s3979170)
+Tran Bao Khoi (s3926093)
+Tran Hoang Son (s3978450)
+Bui Cong Duy (s3978546)
+Hoang Quoc Dat (s3979331)
+Acknowledgement: https://www.youtube.com/watch?v=SnoAwLP1a-0&list=PL4cUxeGkcC9iqqESP8335DA5cRFp8loyp -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <%- include('./partials/link.ejs') %>
-    <title>Minima Records | Your Cart</title>
-    <script
-      defer
-      src="js/createOrder.js"
-    ></script>
-  </head>
 
-  <body class="flex-wrapper">
-    <%- include('./partials/header_customer.ejs') %>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('./partials/link.ejs') %>
+    <title>Minima Records | Your Cart</title>
+    <script defer src="js/createOrder.js"></script>
+</head>
+
+<body class="flex-wrapper">
+  <%- include('./partials/header_customer.ejs') %>
     <main>
       <div class="container mt-5">
         <div class="row">
@@ -31,32 +37,30 @@
               </thead>
               <tbody>
                 <% var total=35 ;if (cart.length> 0) { ; cart.forEach(item=> { %>
-                <tr>
-                  <td class="align-middle"><%= item.product_name %></td>
-                  <td class="align-middle"><%= item.quantity %></td>
-                  <td class="align-middle">
-                    <%= parseFloat(item.quantity) * parseFloat(item.product_price) %>
-                  </td>
-                  <td class="align-middle">
-                    <a
-                      href="/removeItem/<%=item.product_id%>"
-                      class="btn btn btn-outline-danger btn-sm"
-                    >
-                      Remove
-                    </a>
-                  </td>
-                </tr>
-                <% total +=parseFloat(item.quantity) * parseFloat(item.product_price) }) %> <% }
-                else { %>
-                <tr>
-                  <td
-                    colspan="4"
-                    align="center"
-                  >
-                    No Item Found in Cart
-                  </td>
-                </tr>
-                <% } total=Number((total).toFixed(2)) %>
+                  <tr>
+                    <td class="align-middle">
+                      <%= item.product_name %>
+                    </td>
+                    <td class="align-middle">
+                      <%= item.quantity %>
+                    </td>
+                    <td class="align-middle">
+                      <%= parseFloat(item.quantity) * parseFloat(item.product_price) %>
+                    </td>
+                    <td class="align-middle">
+                      <a href="/removeItem/<%=item.product_id%>" class="btn btn btn-outline-danger btn-sm">
+                        Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <% total +=parseFloat(item.quantity) * parseFloat(item.product_price) }) %>
+                    <% } else { %>
+                      <tr>
+                        <td colspan="4" align="center">
+                          No Item Found in Cart
+                        </td>
+                      </tr>
+                      <% } total=Number((total).toFixed(2)) %>
               </tbody>
             </table>
           </div>
@@ -69,10 +73,11 @@
                     <tr>
                       <td>Subtotal</td>
                       <% if (cart.length) { %>
-                      <td>$ <%= Number((total-35).toFixed(2)) %></td>
-                      <% } else {%>
-                      <td>$ 0.00</td>
-                      <% } %>
+                        <td>$ <%= Number((total-35).toFixed(2)) %>
+                        </td>
+                        <% } else {%>
+                          <td>$ 0.00</td>
+                          <% } %>
                     </tr>
                     <tr>
                       <td>Shipping fee</td>
@@ -82,72 +87,50 @@
                     <tr>
                       <td>Total</td>
                       <% if (cart.length) { %>
-                      <td id="totalValue">$ <%= total %></td>
-                      <% } else { %>
-                      <td>$ 0.00</td>
-                      <% } %>
+                        <td id="totalValue">$ <%= total %>
+                        </td>
+                        <% } else { %>
+                          <td>$ 0.00</td>
+                          <% } %>
                     </tr>
                   </tbody>
                 </table>
 
                 <% if (cart.length) { %>
-                <form class="hub">
-                  <select
-                    name="distributionHub"
-                    id="distributionHub"
-                    class="form-select"
-                    aria-label="Assigned Distribution Hub"
-                    required
-                  >
-                    <option
-                      value=""
-                      disabled
-                      selected
-                    >
-                      Select Hub
-                    </option>
-                    <option value="Hanoi">Hanoi</option>
-                    <option value="Ho Chi Minh">Ho Chi Minh</option>
-                    <option value="Da Nang">Da Nang</option>
-                  </select>
-                </form>
-                <div class="d-flex justify-content-end">
-                  <form class="createOrder">
-                    <button
-                      type="submit"
-                      class="btn btn-dark mt-3"
-                    >
-                      Order
-                    </button>
+                  <form class="hub">
+                    <select name="distributionHub" id="distributionHub" class="form-select"
+                      aria-label="Assigned Distribution Hub" required>
+                      <option value="" disabled selected>
+                        Select Hub
+                      </option>
+                      <option value="Hanoi">Hanoi</option>
+                      <option value="Ho Chi Minh">Ho Chi Minh</option>
+                      <option value="Da Nang">Da Nang</option>
+                    </select>
                   </form>
-                </div>
+                  <div class="d-flex justify-content-end">
+                    <form class="createOrder">
+                      <button type="submit" class="btn btn-dark mt-3">
+                        Order
+                      </button>
+                    </form>
+                  </div>
 
-                <% } else { %>
-                <select
-                  name="distributionHub"
-                  id="distributionHub"
-                  class="form-select"
-                  aria-label="Assigned Distribution Hub"
-                  required
-                >
-                  <option
-                    selected
-                    value="Hanoi"
-                  >
-                    Hanoi
-                  </option>
-                  <option value="Ho Chi Minh">Ho Chi Minh</option>
-                  <option value="Da Nang">Da Nang</option>
-                </select>
-                <div class="d-flex justify-content-end">
-                  <button
-                    class="btn btn-dark mt-3"
-                    disabled
-                  >
-                    Order
-                  </button>
-                </div>
-                <% } %>
+                  <% } else { %>
+                    <select name="distributionHub" id="distributionHub" class="form-select"
+                      aria-label="Assigned Distribution Hub" required>
+                      <option selected value="Hanoi">
+                        Hanoi
+                      </option>
+                      <option value="Ho Chi Minh">Ho Chi Minh</option>
+                      <option value="Da Nang">Da Nang</option>
+                    </select>
+                    <div class="d-flex justify-content-end">
+                      <button class="btn btn-dark mt-3" disabled>
+                        Order
+                      </button>
+                    </div>
+                    <% } %>
               </div>
             </div>
           </div>
@@ -155,5 +138,6 @@
       </div>
     </main>
     <%- include('./partials/footer.ejs') %>
-  </body>
+</body>
+
 </html>

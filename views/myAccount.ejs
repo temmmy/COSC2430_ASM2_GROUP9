@@ -1,193 +1,174 @@
+<!-- RMIT University Vietnam
+Course: COSC2430 Web Programming
+Semester: 2023B
+Assessment: Assignment 2
+Authors: 
+Nguyen Chi Nghia (s3979170)
+Tran Bao Khoi (s3926093)
+Tran Hoang Son (s3978450)
+Bui Cong Duy (s3978546)
+Hoang Quoc Dat (s3979331)
+Acknowledgement: https://www.youtube.com/watch?v=SnoAwLP1a-0&list=PL4cUxeGkcC9iqqESP8335DA5cRFp8loyp -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <%- include('./partials/link.ejs') %>
-    <title>
-      Minima Records | <% if (customer) { %> <%= customer.name %> <% } else if (vendor) { %> <%=
-      vendor.name %> <% } else { %> <%= shipper.name %> <% } %>
-    </title>
-    <script
-      defer
-      src="js/updateProfilePicture.js"
-    ></script>
-  </head>
 
-  <body class="flex-wrapper">
-    <main>
-      <% if (customer) { %> <%- include('./partials/header_customer.ejs') %>
-      <div class="container my-5">
-        <div class="row align-items-center">
-          <div class="text-center mb-5">
-            <div>
-              <img
-                src="/images/<%= customer.profilePicture %>"
-                alt="Profile picture of <%= customer.name %>"
-                height="300"
-                class="rounded-circle my-3"
-              />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('./partials/link.ejs') %>
+    <title>
+      Minima Records | <% if (customer) { %>
+        <%= customer.name %>
+          <% } else if (vendor) { %>
+            <%= vendor.name %>
+              <% } else { %>
+                <%= shipper.name %>
+                  <% } %>
+    </title>
+    <script defer src="js/updateProfilePicture.js"></script>
+</head>
+
+<body class="flex-wrapper">
+  <main>
+    <% if (customer) { %> <%- include('./partials/header_customer.ejs') %>
+        <div class="container my-5">
+          <div class="row align-items-center">
+            <div class="text-center mb-5">
+              <div>
+                <img src="/images/<%= customer.profilePicture %>" alt="Profile picture of <%= customer.name %>"
+                  height="300" class="rounded-circle my-3" />
+              </div>
+              <button class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#editImage">
+                Edit Image
+              </button>
             </div>
-            <button
-              class="btn btn-outline-dark btn-sm"
-              data-bs-toggle="modal"
-              data-bs-target="#editImage"
-            >
-              Edit Image
-            </button>
-          </div>
-          <div class="">
-            <div class="list-group">
-              <div class="list-group-item d-flex justify-content-between">
-                <p class="lead fw-bold">Name</p>
-                <p class="lead"><%= customer.name %></p>
-              </div>
-              <div class="list-group-item d-flex justify-content-between">
-                <p class="lead fw-bold">Username</p>
-                <p class="lead"><%= customer.username %></p>
-              </div>
-              <div class="list-group-item d-flex justify-content-between">
-                <p class="lead fw-bold">Address</p>
-                <p class="lead"><%= customer.address %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <% } else if (vendor) {%> <%- include('./partials/header_vendor.ejs') %>
-      <div class="container my-5">
-        <div class="row align-items-start">
-          <div class="text-center mb-5">
-            <div>
-              <img
-                src="/images/<%= vendor.profilePicture %>"
-                alt="Profile picture of <%= vendor.businessName %>"
-                height="300"
-                class="rounded-circle my-3"
-              />
-            </div>
-            <button
-              class="btn btn-outline-dark btn-sm"
-              data-bs-toggle="modal"
-              data-bs-target="#editImage"
-            >
-              Edit Image
-            </button>
-          </div>
-          <div>
-            <div class="list-group">
-              <div class="list-group-item d-flex justify-content-between">
-                <p class="lead fw-bold">Business Name</p>
-                <p class="lead"><%= vendor.businessName%></p>
-              </div>
-              <div class="list-group-item d-flex justify-content-between">
-                <p class="lead fw-bold">Username</p>
-                <p class="lead"><%= vendor.username %></p>
-              </div>
-              <div class="list-group-item d-flex justify-content-between">
-                <p class="lead fw-bold">Business Address</p>
-                <p class="lead"><%= vendor.businessAddress %></p>
+            <div class="">
+              <div class="list-group">
+                <div class="list-group-item d-flex justify-content-between">
+                  <p class="lead fw-bold">Name</p>
+                  <p class="lead">
+                    <%= customer.name %>
+                  </p>
+                </div>
+                <div class="list-group-item d-flex justify-content-between">
+                  <p class="lead fw-bold">Username</p>
+                  <p class="lead">
+                    <%= customer.username %>
+                  </p>
+                </div>
+                <div class="list-group-item d-flex justify-content-between">
+                  <p class="lead fw-bold">Address</p>
+                  <p class="lead">
+                    <%= customer.address %>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <% } else { %> <%-include('./partials/header_shipper.ejs') %>
-      <div class="container my-5">
-        <div class="row align-items-start">
-          <div class="text-center mb-5">
-            <div>
-              <img
-                src="/images/<%= shipper.profilePicture %>"
-                alt="Profile picture of <%= shipper.shipperName %>"
-                height="300"
-                class="rounded-circle my-3"
-              />
-            </div>
-            <button
-              class="btn btn-outline-dark btn-sm"
-              data-bs-toggle="modal"
-              data-bs-target="#editImage"
-            >
-              Edit Image
-            </button>
-          </div>
-          <div>
-            <div class="list-group">
-              <div class="list-group-item d-flex justify-content-between">
-                <p class="lead fw-bold">Name</p>
-                <p class="lead"><%= shipper.shipperName%></p>
+        <% } else if (vendor) {%> <%- include('./partials/header_vendor.ejs') %>
+            <div class="container my-5">
+              <div class="row align-items-start">
+                <div class="text-center mb-5">
+                  <div>
+                    <img src="/images/<%= vendor.profilePicture %>" alt="Profile picture of <%= vendor.businessName %>"
+                      height="300" class="rounded-circle my-3" />
+                  </div>
+                  <button class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#editImage">
+                    Edit Image
+                  </button>
+                </div>
+                <div>
+                  <div class="list-group">
+                    <div class="list-group-item d-flex justify-content-between">
+                      <p class="lead fw-bold">Business Name</p>
+                      <p class="lead">
+                        <%= vendor.businessName%>
+                      </p>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                      <p class="lead fw-bold">Username</p>
+                      <p class="lead">
+                        <%= vendor.username %>
+                      </p>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                      <p class="lead fw-bold">Business Address</p>
+                      <p class="lead">
+                        <%= vendor.businessAddress %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="list-group-item d-flex justify-content-between">
-                <p class="lead fw-bold">Username</p>
-                <p class="lead"><%= shipper.username %></p>
-              </div>
-              <div class="list-group-item d-flex justify-content-between">
-                <p class="lead fw-bold">Distribution Hub</p>
-                <p class="lead"><%= shipper.distributionHub %></p>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <% } %>
-      <div
-        class="modal fade"
-        id="editImage"
-        tabindex="-1"
-        aria-labelledby="editImage"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1
-                class="modal-title fs-5"
-                id="editImageLabel"
-              >
-                Change Profile Picture
-              </h1>
-              <button
-                class="btn-close"
-                type="button"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <input
-                  type="file"
-                  class="form-control"
-                  name="image"
-                  id="image"
-                />
-              </form>
-            </div>
-            <div class="modal-footer">
-              <form class="formChange">
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="submit"
-                  class="btn btn-dark"
-                >
-                  Save changes
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-    <%- include('./partials/footer.ejs') %>
-  </body>
+            <% } else { %> <%-include('. /partials/header_shipper.ejs') %>
+                <div class="container my-5">
+                  <div class="row align-items-start">
+                    <div class="text-center mb-5">
+                      <div>
+                        <img src="/images/<%= shipper.profilePicture %>"
+                          alt="Profile picture of <%= shipper.shipperName %>" height="300"
+                          class="rounded-circle my-3" />
+                      </div>
+                      <button class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#editImage">
+                        Edit Image
+                      </button>
+                    </div>
+                    <div>
+                      <div class="list-group">
+                        <div class="list-group-item d-flex justify-content-between">
+                          <p class="lead fw-bold">Name</p>
+                          <p class="lead">
+                            <%= shipper.shipperName%>
+                          </p>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between">
+                          <p class="lead fw-bold">Username</p>
+                          <p class="lead">
+                            <%= shipper.username %>
+                          </p>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between">
+                          <p class="lead fw-bold">Distribution Hub</p>
+                          <p class="lead">
+                            <%= shipper.distributionHub %>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                  <div class="modal fade" id="editImage" tabindex="-1" aria-labelledby="editImage" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="editImageLabel">
+                            Change Profile Picture
+                          </h1>
+                          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                            <input type="file" class="form-control" name="image" id="image" />
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <form class="formChange">
+                            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">
+                              Close
+                            </button>
+                            <button type="submit" class="btn btn-dark">
+                              Save changes
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  </main>
+  <%- include('./partials/footer.ejs') %>
+</body>
+
 </html>

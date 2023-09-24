@@ -1,18 +1,27 @@
+<!-- RMIT University Vietnam
+Course: COSC2430 Web Programming
+Semester: 2023B
+Assessment: Assignment 2
+Authors: 
+Nguyen Chi Nghia (s3979170)
+Tran Bao Khoi (s3926093)
+Tran Hoang Son (s3978450)
+Bui Cong Duy (s3978546)
+Hoang Quoc Dat (s3979331)
+Acknowledgement: https://www.youtube.com/watch?v=SnoAwLP1a-0&list=PL4cUxeGkcC9iqqESP8335DA5cRFp8loyp -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <%- include('./partials/link.ejs') %>
-    <title>Minima Records</title>
-  </head>
 
-  <body class="flex-wrapper">
-    <!-- navbar -->
-    <%- include('partials/header_home') %>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('./partials/link.ejs') %>
+    <title>Minima Records</title>
+</head>
+
+<body class="flex-wrapper">
+  <!-- navbar -->
+  <%- include('partials/header_home') %>
     <main>
       <section id="intro">
         <div class="container my-5 px-5">
@@ -21,26 +30,17 @@
             <div class="col-md-6 text-center text-md-start">
               <h2 class="display-3">All of Your Favourite Vinyls, All At One Place</h2>
               <p class="lead text-secondary">The biggest market for the best quality music.</p>
-              <a
-                href="/login"
-                class="btn btn-dark btn-lg"
-                >Shop Now</a
-              >
+              <a href="/login" class="btn btn-dark btn-lg">Shop Now</a>
             </div>
             <!-- main image -->
-            <img
-              src="./images/vulfpeck.webp"
+            <img src="./images/vulfpeck.webp"
               alt="the band Vulfpeck's Vinyl print of their album 'The Beautiful Game' with Jack Stratton as a soccer player."
-              class="col-md-6 d-none d-md-block"
-            />
+              class="col-md-6 d-none d-md-block" />
           </div>
         </div>
       </section>
 
-      <section
-        id="bestsellers"
-        class="bg-dark mt-5 p-5"
-      >
+      <section id="bestsellers" class="bg-dark mt-5 p-5">
         <div class="container-lg">
           <!-- heading -->
           <div class="text-center">
@@ -50,22 +50,18 @@
             </p>
           </div>
           <!-- carousel -->
-          <div
-            id="carousel"
-            class="carousel slide"
-            data-bs-ride="carousel"
-          >
+          <div id="carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <div class="row align-items-center justify-content-center">
                   <div class="col-9 col-lg-6 col-xl-4">
                     <div class="card border-0 px-3">
-                      <img
-                        src="/images/<%= products[products.length-1].image %>"
-                        alt="<%= products[products.length-1].name %> Album Cover"
-                      />
+                      <img src="/images/<%= products[products.length-1].image %>"
+                        alt="<%= products[products.length-1].name %> Album Cover" />
                       <div class="card-body text-center">
-                        <h4 class="card-title"><%= products[products.length-1].name %></h4>
+                        <h4 class="card-title">
+                          <%= products[products.length-1].name %>
+                        </h4>
                         <p class="lead card-subtitle">
                           <%= products[products.length-1].artistName %>
                         </p>
@@ -75,69 +71,46 @@
                         <p class="card-text text-secondary d-none d-lg-block">
                           <%= products[products.length-1].description %>
                         </p>
-                        <a
-                          href="/login"
-                          class="btn btn-outline-dark btn-lg my-2"
-                          >Buy Now</a
-                        >
+                        <a href="/login" class="btn btn-outline-dark btn-lg my-2">Buy Now</a>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <% for( let index = products.length-2; index > products.length-6; index-- ) { %>
-              <div class="carousel-item">
-                <div class="row align-items-center justify-content-center">
-                  <div class="col-9 col-lg-6 col-xl-4">
-                    <div class="card border-0 px-3">
-                      <img
-                        src="/images/<%= products[index].image %>"
-                        alt="<%= products[index].name %> Album Cover"
-                      />
-                      <div class="card-body text-center">
-                        <h4 class="card-title"><%= products[index].name %></h4>
-                        <p class="lead card-subtitle"><%= products[index].artistName %></p>
-                        <p class="display-5 my-4 text-muted fw-bold">
-                          $<%= products[index].price %>
-                        </p>
-                        <p class="card-text text-secondary d-none d-lg-block">
-                          <%= products[index].description %>
-                        </p>
-                        <a
-                          href="/login"
-                          class="btn btn-outline-dark btn-lg my-2"
-                          >Buy Now</a
-                        >
+              <% for( let index=products.length-2; index> products.length-6; index-- ) { %>
+                <div class="carousel-item">
+                  <div class="row align-items-center justify-content-center">
+                    <div class="col-9 col-lg-6 col-xl-4">
+                      <div class="card border-0 px-3">
+                        <img src="/images/<%= products[index].image %>" alt="<%= products[index].name %> Album Cover" />
+                        <div class="card-body text-center">
+                          <h4 class="card-title">
+                            <%= products[index].name %>
+                          </h4>
+                          <p class="lead card-subtitle">
+                            <%= products[index].artistName %>
+                          </p>
+                          <p class="display-5 my-4 text-muted fw-bold">
+                            $<%= products[index].price %>
+                          </p>
+                          <p class="card-text text-secondary d-none d-lg-block">
+                            <%= products[index].description %>
+                          </p>
+                          <a href="/login" class="btn btn-outline-dark btn-lg my-2">Buy Now</a>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <% } %>
+                <% } %>
             </div>
             <!-- prev and next buttons -->
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#carousel"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
             </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#carousel"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
           </div>
@@ -224,5 +197,6 @@
     </main>
     <!-- Footer  -->
     <%- include('partials/footer.ejs') %>
-  </body>
+</body>
+
 </html>
