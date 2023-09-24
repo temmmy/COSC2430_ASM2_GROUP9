@@ -160,6 +160,7 @@ app.get('/login', (req, res) => res.render('LOG'));
 app.get('/customerLOG', (req, res) => res.render('LOG'));
 app.get('/vendorLOG', (req, res) => res.render('LOG'));
 app.get('/shipperLOG', (req, res) => res.render('LOG'));
+app.get('/orderConfirmation', (req, res) => res.render('thankYou'));
 app.use(routes);
 
 app.use((req, res) => {
