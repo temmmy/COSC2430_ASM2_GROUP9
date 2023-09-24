@@ -35,6 +35,12 @@ const handleErrors = (err) => {
         description: ' ',
         price: ' ',
     };
+    // validation error
+    if (err.message.includes('validation failed')) {
+        Object.values(err.errors).forEach(({ properties }) => {
+            errors[properties.path] = properties.message
+        })
+    }
 
     if (err.message === 'incorrect username') {
         errors.username = 'The username is not registered';
@@ -50,8 +56,6 @@ const handleErrors = (err) => {
     if (err.message.includes('CastError: Cast to Number')) {
         errors.price = 'Incorrect format for the price';
     }
-
-    // duplication error
     if (err.code === 11000) {
         if (Object.keys(err.keyPattern)[0] == 'username') {
             errors[Object.keys(err.keyPattern)[0]] = 'The username is already registered';
@@ -60,8 +64,13 @@ const handleErrors = (err) => {
         }
         return errors;
     }
+    console.log(errors)
     return errors;
 };
+
+
+// duplication error
+
 
 module.exports.customer_signup_get = (req, res) => {
     res.render('customerREG');
