@@ -1,3 +1,15 @@
+// RMIT University Vietnam
+// Course: COSC2430 Web Programming
+// Semester: 2023B
+// Assessment: Assignment 2
+// Authors: 
+// Nguyen Chi Nghia(s3979170)
+// Tran Bao Khoi(s3926093)
+// Tran Hoang Son(s3978450)
+// Bui Cong Duy(s3978546)
+// Hoang Quoc Dat(s3979331)
+// Acknowledgement: https://www.youtube.com/watch?v=SnoAwLP1a-0&list=PL4cUxeGkcC9iqqESP8335DA5cRFp8loyp
+
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes/routes');
@@ -25,6 +37,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
+
+// using session to implement shopping cart
 app.use(
   session({
     secret: 'user secret',
@@ -45,9 +59,10 @@ mongoose
   .then((result) => app.listen(3000))
   .catch((err) => console.log(err));
 
-// routes
+// For every route the status of current user will be cheked
 app.get('*', checkUser);
 
+// Homepage
 app.get('/', async (req, res) => {
   try {
     const products = await Product.find();
@@ -61,6 +76,7 @@ app.get('/', async (req, res) => {
   }
 });
 
+// For everyone
 app.get('/myAccount', requireAuth, async (req, res) => {
   const token = req.cookies.jwt;
   if (token) {
@@ -170,6 +186,8 @@ app.get('/shipperOrders', requireAuth, checkUserShipper, async (req, res) => {
   });
 });
 
+
+// Genereal Pages
 app.get('/about', (req, res) => res.render('about'));
 app.get('/copyright', (req, res) => res.render('copyright'));
 app.get('/privacy', (req, res) => res.render('privacy'));
@@ -183,6 +201,8 @@ app.get('/vendorLOG', (req, res) => res.render('LOG'));
 app.get('/shipperLOG', (req, res) => res.render('LOG'));
 app.use(routes);
 
+
+// Other Pages
 app.use((req, res) => {
   res.status(404).render('404');
 });

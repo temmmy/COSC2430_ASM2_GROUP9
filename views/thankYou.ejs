@@ -1,16 +1,26 @@
+<!-- RMIT University Vietnam
+Course: COSC2430 Web Programming
+Semester: 2023B
+Assessment: Assignment 2
+Authors: 
+Nguyen Chi Nghia (s3979170)
+Tran Bao Khoi (s3926093)
+Tran Hoang Son (s3978450)
+Bui Cong Duy (s3978546)
+Hoang Quoc Dat (s3979331)
+Acknowledgement: https://www.youtube.com/watch?v=SnoAwLP1a-0&list=PL4cUxeGkcC9iqqESP8335DA5cRFp8loyp -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <%- include('./partials/link.ejs') %>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('./partials/link.ejs') %>
     <title>Minima Records | Order Submitted</title>
-  </head>
-  <body class="flex-wrapper">
-    <%- include('./partials/header_customer.ejs') %>
+</head>
+
+<body class="flex-wrapper">
+  <%- include('./partials/header_customer.ejs') %>
     <main>
       <div class="container my-5">
         <div class="row text-center text-lg-start">
@@ -20,15 +30,12 @@
             arrive at your door!
           </p>
           <div class="my-5">
-            <a
-              href="/productsPage"
-              class="btn btn-dark btn-lg"
-              >Continue Browsing</a
-            >
+            <a href="/productsPage" class="btn btn-dark btn-lg">Continue Browsing</a>
           </div>
         </div>
       </div>
     </main>
     <%- include('./partials/footer.ejs') %>
-  </body>
+</body>
+
 </html>
