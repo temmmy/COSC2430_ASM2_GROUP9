@@ -40,6 +40,10 @@ router.get('/removeItem/:id', controller.customer_remove_item_get)
 // Route for ordering itesm from cart (customer)
 router.post('/addOrder', controller.customer_add_order_post)
 
+router.post('/updateProfilePicture', upload.single('image'), controller.user_change_profile_picture_post)
+
+// Route for logging out (everyone)
 router.get('/logout', controller.logout_get)
+
 
 module.exports = router

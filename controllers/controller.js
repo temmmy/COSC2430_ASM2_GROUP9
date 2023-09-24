@@ -335,6 +335,68 @@ module.exports.logout_get = (req, res) => {
     res.redirect('/');
 };
 
+module.exports.user_change_profile_picture_post = async (req, res) => {
+    const token = req.cookies.jwt
+    const date = new Date();
+    const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+    const image = `${formattedDate}-${req.file.originalname}`;
+    var customer, vendor, shipper;
+    var id;
+    if (token) {
+        jwt.verify(token, 'user secret', async (err, decodedToken) => {
+            id = decodedToken.id
+            customer = await Customer.findById(id)
+            vendor = await Vendor.findById(id)
+            shipper = await Shipper.findById(id)
+            if (customer) {
+                if (req.file) {
+                    try {
+                        const oldImage = await Customer.findById(id)
+                        const oldPicture = oldImage.profilePicture
+                        fs.unlinkSync('./public/images/' + oldPicture);
+                        const result = await Customer.findByIdAndUpdate(id, {
+                            profilePicture: image
+                        })
+                        res.status(201).json({ user: "sucess" })
+                    } catch (err) {
+                        console.log(err)
+                    }
+                }
+            }
+            else if (vendor) {
+                try {
+                    const oldImage = await Vendor.findById(id)
+                    const oldPicture = oldImage.profilePicture
+                    fs.unlinkSync('./public/images/' + oldPicture);
+                    const result = await Vendor.findByIdAndUpdate(id, {
+                        profilePicture: image
+                    })
+                    res.status(201).json({ user: "sucess" })
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+
+            else {
+                try {
+                    const oldImage = await Shipper.findById(id)
+                    const oldPicture = oldImage.profilePicture
+                    fs.unlinkSync('./public/images/' + oldPicture);
+                    const result = await Shipper.findByIdAndUpdate(id, {
+                        profilePicture: image
+                    })
+                    res.status(201).json({ user: "sucess" })
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+        })
+
+    }
+
+}
+
+
 module.exports.customer_add_order_post = async (req, res) => {
 
 }
