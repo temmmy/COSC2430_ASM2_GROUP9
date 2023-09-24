@@ -24,13 +24,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(session({
-  secret: 'user secret',
-  cookie: { maxAge: 60 * 60 * 24 * 24 * 7 },
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false },
-}));
+app.use(
+  session({
+    secret: 'user secret',
+    cookie: { maxAge: 60 * 60 * 24 * 24 * 7 },
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  })
+);
 
 app.set('view engine', 'ejs');
 
@@ -104,7 +106,7 @@ app.get('/shoppingCart', requireAuth, checkUserCustomer, async (req, res) => {
   if (!req.session.cart) {
     req.session.cart = [];
   }
-  res.render('customerShoppingCart', { cart: req.session.cart })
+  res.render('customerShoppingCart', { cart: req.session.cart });
 });
 
 // Vendor Pages

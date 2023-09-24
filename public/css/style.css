@@ -1,12 +1,10 @@
-body,
-html {
-  height: 100%;
-}
-
-main {
-  min-height: 100%;
+.flex-wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 #footer {
-  margin: -90px 0;
+  margin-top: auto;
 }
