@@ -47,8 +47,6 @@
                   class="btn btn-outline-dark border-0 mb-2 edit-btn data"
                   data-bs-toggle="modal"
                   data-bs-target="#editModal"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editModal"
                   data-id="<%= order._id %>"
                   data-status="<%= order.status %>"
                 >
@@ -92,11 +90,13 @@
                     required
                   >
                     <option
+                      value=""
+                      disabled
                       selected
-                      value="Active"
                     >
-                      Active
+                      Select Status
                     </option>
+                    <option value="Active">Active</option>
                     <option value="Closed">Closed</option>
                     <option value="Cancelled">Cancelled</option>
                   </select>
