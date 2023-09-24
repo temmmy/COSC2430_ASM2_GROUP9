@@ -14,32 +14,48 @@
     <main>
       <div class="container">
         <div class="row align-items-center mt-5">
-          <img src="/images/<%= product.image %>" alt="<%= product.name %>" class="col-12 col-lg-6" />
+          <img
+            src="/images/<%= product.image %>"
+            alt="<%= product.name %>"
+            class="col-12 col-lg-6"
+          />
           <div class="col-12 col-lg-6 px-4">
-            <h1 class="display-3">
-              <%= product.name %>
-            </h1>
-            <h2 class="h3">
-              <%= product.artistName %>
-            </h2>
+            <h1 class="display-3"><%= product.name %></h1>
+            <h2 class="h3"><%= product.artistName %></h2>
             <div class="d-flex flex-column align-items-start mt-5">
-              <h1 class="display-3 fw-bold mb-3">$<%= product.price %>
-              </h1>
-              <form method="post" action="/addToCart">
-                <input type="hidden" name="product_id" value="<%= product._id %>">
-                <input type="hidden" name="product_name" value="<%= product.name %>">
-                <input type="hidden" name="product_price" value="<%= product.price %>">
-                <button type="submit" class="btn btn-outline-dark btn-lg my-2 rounded-pill">Add to Cart</a>
+              <h1 class="display-3 fw-bold mb-3">$<%= product.price %></h1>
+              <form
+                method="post"
+                action="/addToCart"
+              >
+                <input
+                  type="hidden"
+                  name="product_id"
+                  value="<%= product._id %>"
+                />
+                <input
+                  type="hidden"
+                  name="product_name"
+                  value="<%= product.name %>"
+                />
+                <input
+                  type="hidden"
+                  name="product_price"
+                  value="<%= product.price %>"
+                />
+                <button
+                  type="submit"
+                  class="btn btn-outline-dark btn-lg my-2 rounded-pill"
+                >
+                  Add to Cart
+                </button>
               </form>
             </div>
           </div>
-          <p class="lead my-5 px-4">
-            <%= product.description %>
-          </p>
+          <p class="lead my-5 px-4"><%= product.description %></p>
         </div>
       </div>
     </main>
     <%- include('./partials/footer.ejs') %>
-</body>
-
+  </body>
 </html>
