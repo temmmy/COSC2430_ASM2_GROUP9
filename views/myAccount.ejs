@@ -63,7 +63,7 @@
                     <img src="/images/<%= vendor.profilePicture %>" alt="Profile picture of <%= vendor.businessName %>"
                       height="300px" class="rounded-circle my-3" />
                   </div>
-                  <button class="btn btn-outline-dark btn-sm">Edit
+                  <button class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#editImage">Edit
                     Image</button>
                 </div>
                 <div>
@@ -99,7 +99,8 @@
                           alt="Profile picture of <%= shipper.shipperName %>" height="300px"
                           class="rounded-circle my-3" />
                       </div>
-                      <button class="btn btn-outline-dark btn-sm">Edit
+                      <button class="btn btn-outline-dark btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#editImage">Edit
                         Image</button>
                     </div>
                     <div>

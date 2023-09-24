@@ -2,6 +2,7 @@ const Customer = require('../models/Customer');
 const Shipper = require('../models/Shipper');
 const Vendor = require('../models/Vendor');
 const Product = require('../models/Product');
+const Order = require('../models/Order')
 const jwt = require('jsonwebtoken');
 const session = require('express-session');
 const fs = require('fs');
@@ -393,10 +394,27 @@ module.exports.user_change_profile_picture_post = async (req, res) => {
         })
 
     }
-
 }
-
-
 module.exports.customer_add_order_post = async (req, res) => {
-
+    const { total, distributionHub } = req.body;
+    products = req.session.cart
+    console.log(req.session.cart)
+    const token = req.cookies.jwt
+    if (token) {
+        jwt.verify(token, 'user secret', async (err, decodedToken) => {
+            id = decodedToken.id
+            customer = await Customer.findById(id)
+            try {
+                const order = await Order.create({
+                    'products': products,
+                    'status': "Active",
+                    'distributionHub': distributionHub,
+                    'totalPrice': total
+                });
+                res.status(201).json({ order: order._id });
+            } catch (err) {
+                res.status(400).json({ errors });
+            }
+        })
+    }
 }

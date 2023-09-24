@@ -2,13 +2,22 @@ const mongoose = require('mongoose')
 
 const orderSchema = new mongoose.Schema({
     customer: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Customer'
     },
     products: [{
-        product: {
-            type: Schema.Types.ObjectId,
+
+        product_id: {
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Product',
+            required: true
+        },
+        product_name: {
+            type: String,
+            required: true,
+        },
+        product_price: {
+            type: String,
             required: true
         },
         quantity: {
@@ -23,11 +32,11 @@ const orderSchema = new mongoose.Schema({
     distributionHub: {
         type: String,
         enum: ['Hanoi', 'Ho Chi Minh', 'Da Nang'],
-        required: True
+        required: true
     },
     totalPrice: {
         type: Number,
-        required: True
+        required: true
     }
 })
 
