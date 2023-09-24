@@ -47,6 +47,19 @@ mongoose
 // routes
 app.get('*', checkUser);
 
+app.get('/', async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.render('homepage', { products: products });
+    if (!products) {
+      return res.status(404).render('error404');
+    }
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 app.get('/myAccount', requireAuth, async (req, res) => {
   const token = req.cookies.jwt;
   if (token) {
@@ -136,7 +149,6 @@ app.get('/myProducts', requireAuth, checkUserVendor, async (req, res) => {
 // Shipper Pages
 app.get('/shipperOrders', requireAuth, checkUserShipper, (req, res) => res.render('shipperOrders'));
 
-app.get('/', (req, res) => res.render('homepage'));
 app.get('/about', (req, res) => res.render('about'));
 app.get('/copyright', (req, res) => res.render('copyright'));
 app.get('/privacy', (req, res) => res.render('privacy'));
@@ -149,3 +161,7 @@ app.get('/customerLOG', (req, res) => res.render('LOG'));
 app.get('/vendorLOG', (req, res) => res.render('LOG'));
 app.get('/shipperLOG', (req, res) => res.render('LOG'));
 app.use(routes);
+
+app.use((req, res) => {
+  res.status(404).render('404');
+});
