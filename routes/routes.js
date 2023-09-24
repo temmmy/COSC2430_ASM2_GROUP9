@@ -38,7 +38,7 @@ router.post('/addToCart', controller.customer_add_to_cart_post)
 router.get('/removeItem/:id', controller.customer_remove_item_get)
 
 // Route for ordering itesm from cart (customer)
-
+router.post('/addOrder', controller.customer_add_order_post)
 
 router.get('/logout', controller.logout_get)
 
