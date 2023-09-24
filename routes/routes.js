@@ -24,7 +24,7 @@ router.post('/shipperREG', upload.single('profilePicture'), controller.shipper_s
 router.get('/shipperLOG', controller.shipper_login_get)
 router.post('/shipperLOG', controller.shipper_login_post)
 
-router.get('/logout', controller.logout_get)
+
 
 // Route for adding product (vendor)
 router.post('/addProduct', upload.single('image'), controller.vendor_add_product_post)
@@ -32,5 +32,14 @@ router.post('/addProduct', upload.single('image'), controller.vendor_add_product
 router.get('/delete/:id', controller.vendor_delete_product_get)
 // Route for editing product (vendor)
 router.post('/editProduct/:id', upload.single('image'), controller.vendor_edit_product_post)
+// Route for adding to cart (customer)
+router.post('/addToCart', controller.customer_add_to_cart_post)
+// Route for deleting an item from cart (customer )
+router.get('/removeItem/:id', controller.customer_remove_item_get)
+
+// Route for ordering itesm from cart (customer)
+
+
+router.get('/logout', controller.logout_get)
 
 module.exports = router

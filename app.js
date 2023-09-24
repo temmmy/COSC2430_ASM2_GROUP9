@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes/routes');
 const jwt = require('jsonwebtoken');
+const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const {
   requireAuth,
@@ -22,6 +23,14 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(session({
+  secret: 'user secret',
+  cookie: { maxAge: 60 * 60 * 24 * 24 * 7 },
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false },
+}));
 
 app.set('view engine', 'ejs');
 
@@ -59,9 +68,12 @@ app.get('/myAccount', requireAuth, async (req, res) => {
 });
 // Customer Pages
 app.get('/productsPage', requireAuth, checkUserCustomer, async (req, res) => {
+  if (!req.session.cart) {
+    req.session.cart = [];
+  }
   try {
     const products = await Product.find();
-    res.render('customerProducts', { products: products });
+    res.render('customerProducts', { products: products, cart: req.session.cart });
     if (!products) {
       // Handle the case where the product doesn't exist
       return res.status(404).render('error404');
@@ -86,6 +98,13 @@ app.get('/productDetailPage/:productId', requireAuth, checkUserCustomer, async (
     console.error('Error fetching product details:', error);
     res.status(500).send('Internal Server Error');
   }
+});
+
+app.get('/shoppingCart', requireAuth, checkUserCustomer, async (req, res) => {
+  if (!req.session.cart) {
+    req.session.cart = [];
+  }
+  res.render('customerShoppingCart', { cart: req.session.cart })
 });
 
 // Vendor Pages
@@ -127,5 +146,4 @@ app.get('/login', (req, res) => res.render('LOG'));
 app.get('/customerLOG', (req, res) => res.render('LOG'));
 app.get('/vendorLOG', (req, res) => res.render('LOG'));
 app.get('/shipperLOG', (req, res) => res.render('LOG'));
-app.get('/shoppingCart', (req, res) => res.render('customerShoppingCart'));
 app.use(routes);
