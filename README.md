@@ -11,3 +11,45 @@ Bui Cong Duy
 Tran Hoang Son
 
 Hoang Quoc Dat
+
+### GitHub Repository
+
+https://github.com/temmmy/COSC2430_ASM2_GROUP9.git
+
+### YouTube Presentation Link
+
+### Usernames --- Passwords
+
+DuyBui<33333333 --- BestValorantPlayer! (Shipper - Hanoi)
+
+temmmyyyyy --- Nikitaisnumber1! (Vendor, Customer)
+
+khooihoodi --- khoo! (Customer)
+
+HoangQuocDat --- BestWebStudent! (Vendor)
+
+### How to start the website
+
+Please navigate to the location of the project folder using your Command Line.
+
+Please first install all the necessary dependencies by typing in the command line:
+
+`npm install`
+
+Confirm that the folder node_modules have appeared in the file tree.
+
+After that, please type in:
+
+`node app index.js`
+
+or if you have installed the dev dependency Nodemon:
+
+`nodemon index`
+
+Go to your preferred browser, and type in the search bar:
+
+`localhost:3000`
+
+The website should now be visible.
+
+As a warning, please keep the command line open during the process, as closing the command line will result in shutting down the server.
