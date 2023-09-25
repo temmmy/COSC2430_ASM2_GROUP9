@@ -18,6 +18,8 @@ https://github.com/temmmy/COSC2430_ASM2_GROUP9.git
 
 ### YouTube Presentation Link
 
+https://youtu.be/4u-N6hte6Y8
+
 ### Usernames --- Passwords
 
 DuyBui<33333333 --- BestValorantPlayer! (Shipper - Hanoi)
