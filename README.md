@@ -42,7 +42,7 @@ Confirm that the folder node_modules have appeared in the file tree.
 
 After that, please type in:
 
-`node app index.js`
+`node index.js`
 
 or if you have installed the dev dependency Nodemon:
 
